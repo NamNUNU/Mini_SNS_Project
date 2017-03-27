@@ -1,6 +1,6 @@
 ## Team Rule
 
-### commit rule  
+### Commit rule  
 
 1. 제목과 본문을 모두 작성하여 commit한다
 2. commit -m 옵션을 사용하지 않고 vim등과 같은 에디터를 사용하여 작성한다
@@ -15,8 +15,6 @@ Update communication Function
 1) Add Bluetooth BLE 4.0 service
 2) Remove WiFi Module
 ~~~
-
-### 일반적인 git 작성 규칙
 
 #### 제목  
 - 50자를 넘지 않는다  
@@ -41,3 +39,21 @@ Update communication Function
 ### 코딩 컨벤션 룰
 
 - 코딩 컨벤션은 naver와 air_bnb의 공식 문서를 참고한다.
+
+---
+
+### 브랜치 생성 규칙
+
+- 자신의 이름의 이니셜로 브랜치를 생성한다.
+- 브랜치가 많이 생길때 이니셜 뒤에 넘버링으로 구분한다.
+- master 브랜치에서 작업하지 않는다.
+
+---
+
+### 개발 환경(스택)
+
+- HTML5
+- CSS3
+- JavaScript(ES6)
+- NodeJS(templete -> ejs, flamewrok -> Express)
+- MySQL
