@@ -1,0 +1,103 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .profileView {
+      text-align: center;
+    }
+
+    .pro-info {
+      display: inline-flex;
+      padding: 5rem 0 3rem 0;
+      width: 700px;
+      margin: 0 auto;
+    }
+
+    .pro-info .pro-photo {
+      display: inline-block;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 100%;
+      padding: 5px;
+    }
+
+    .pro-info .pro-photo img {
+      display: block;
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+    }
+
+    .pro-article {
+      padding: 1.3rem 1rem 1rem 1rem;
+      margin-left: 1rem;
+      width: 100%;
+      text-align: justify;
+    }
+
+    .pro-article div {
+      padding-bottom: 1rem;
+    }
+
+    .pro-article p {
+      padding-bottom: 0.5rem;
+    }
+
+    .pro-cardView {
+      padding: 1rem;
+    }
+
+    .pro-cardView .pro-card {
+      padding: 0.5rem;
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="header-wrap">
+      <div class="header-content">
+        <h1 class="h-logo"><a href="">Codestagram</a></h1>
+        <div class="search-box">
+          <input type="text" class="txt-box" /> </div>
+        <ul class="util">
+          <li>profile</li>
+          <li>log-out</li>
+        </ul>
+      </div>
+    </header>
+    <div class="container">
+      <div class="content">
+        <div class="profileView">
+          <div class="pro-info">
+            <div class="pro-photo"> <img src="" alt="profile photo" /> </div>
+            <div class="pro-article">
+              <div>
+                <p style="display:inline">{EMAIL}</p>
+                <button>EDIT</button>
+              </div>
+              <p>게시물 수 : {all_post_num}</p>
+              <p>{introduce}</p>
+            </div>
+          </div>
+          <div class="pro-cardView"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card" src=""
+              alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card"
+              src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card"
+              src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card"
+              src="" alt="CARD"><img class="pro-card" src="" alt="CARD"><img class="pro-card" src="" alt="CARD"> </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer-wrap">
+      <div class="footer-content">
+        <p class="copy">정보 지원 블로그 관련 기사 채용정보 개인정보 처리방침</p>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
