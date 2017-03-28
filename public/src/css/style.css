@@ -1,0 +1,93 @@
+html, body, div, header, p, ul, li, section, nav, footer, h1, h2, h3, h4 {margin:0; padding:0; line-height: 18px; font-size: 16px; color: #000;
+font-family: "Helvetica Neue", "arial","sans-serif"}
+ul { list-style:none;}
+
+a:link,a:hover,a:visited,a:active{
+  text-decoration:none;
+}
+
+input.txt-box{
+  width:100%;
+}
+
+.wrap{
+  width : 100%;
+  height : 100%;
+}
+
+.container{
+  margin:-82px 0 -58px 0;
+  min-height:100%;
+  background-color: #fafafa;
+}
+
+.container .content{
+  padding:82px 0 58px 0;
+}
+
+.header-wrap {
+  position:relative;
+  z-index:10;
+  padding: 25px 0px;
+  background-color: #fff;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.header-content{
+  position:relative;
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.header-wrap .h-logo{
+  position: absolute;
+  top : 4px;
+  left : 0px;
+  font-size: 2rem;
+}
+
+.header-wrap .search-box{
+  width: 200px;
+  margin: 0 auto;
+  padding:2px 5px;
+  border: 1px solid #d9d9d9;
+}
+
+.header-wrap .search-box input{
+  border: none;
+  font-size:1.2rem;
+}
+
+.header-wrap .util{
+  position:absolute;
+  top: 5px;
+  right: 0px;
+}
+
+.header-wrap .util:after{
+  content:"";
+  display: block;
+  clear:both;
+}
+
+.header-wrap .util li{
+  float:left;
+  margin-left: 10px;
+}
+
+.header-wrap .util li:first-child{
+  margin-left:0;
+}
+
+.footer-wrap{
+  padding: 20px 0;
+}
+
+.footer-content{
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-wrap .footer-content .copy{
+  text-align: center;
+}
