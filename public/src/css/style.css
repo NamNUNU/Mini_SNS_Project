@@ -1,4 +1,4 @@
-html, body, div, header, p, ul, li, section, nav, footer, h1, h2, h3, h4 {margin:0; padding:0; line-height: 18px; font-size: 16px; color: #000;
+html, body, div, header, p, ul, li, section, nav, footer, h1, h2, h3, h4, a, input, button{margin:0; padding:0; line-height: 18px; font-size: 16px; color: #000;
 font-family: "Helvetica Neue", "arial","sans-serif"}
 ul { list-style:none;}
 
@@ -23,6 +23,8 @@ input.txt-box{
 
 .container .content{
   padding:82px 0 58px 0;
+  width:1100px;
+  margin:0 auto;
 }
 
 .header-wrap {
@@ -43,6 +45,9 @@ input.txt-box{
   position: absolute;
   top : 4px;
   left : 0px;
+}
+
+.header-wrap .h-logo a{
   font-size: 2rem;
 }
 
@@ -90,4 +95,140 @@ input.txt-box{
 
 .footer-wrap .footer-content .copy{
   text-align: center;
+}
+
+.main-card{
+  width:600px;
+  margin:40px auto 0 auto;
+  border:1px solid #d3d3d3;
+  border-radius: 3px;
+  background-color:#fff;
+}
+
+.main-card .card-header{
+  position:relative;
+  padding:20px;
+}
+
+.main-card .card-header .user-profile{
+  position: absolute;
+  display:inline-block;
+  top:20px;
+  left:20px;
+  width:20px;
+  height:20px;
+  background-color:#bbb;
+  border-radius:20px;
+}
+
+.main-card .card-header .info-box{
+  padding-left:30px;
+}
+
+.main-card .card-photo .photo-img{
+}
+
+.main-card .card-photo .photo-img img{
+  width:600px;
+  height:auto;
+}
+
+.main-card .card-content{
+  padding:20px;
+}
+
+.main-card .card-content .content-box .writer{
+  margin-right:5px;
+  font-weight:bold;
+}
+
+.main-card .card-content .comment-info{
+  margin-top:20px;
+}
+
+.main-card .card-content .comment-info .total{
+  color:#999;
+}
+
+.main-card .card-content .comment-info .more-btn{
+  color:#999;
+}
+
+.main-card .card-content .comment-list{
+  margin-top:20px;
+}
+
+.main-card .card-content .comment-list li{
+  margin-top:5px;
+}
+
+.main-card .card-content .comment-list li:first-child{
+  margin-top:0;
+}
+
+.main-card .card-content .comment-list li .writer{
+  margin-right:5px;
+  font-weight: bold;
+}
+
+.main-card .card-content .reply-comment{
+  margin-top:20px;
+  padding:20px 0 10px 0;
+  border-top:1px solid #d9d9d9;
+}
+
+.main-card .card-content .reply-comment .txt-box-wrap .txt-box{
+  border:none;
+}
+
+.card-more-btn{
+  text-align:center;
+  display:block;
+  width:150px;
+  margin:40px auto;
+  padding:5px 0;
+  color:#fff;
+  font-weight:bold;
+  border-radius: 3px;
+  background-color:#3897f0;
+}
+
+.card-make{
+  width:560px;
+  margin:40px auto 0 auto;
+  padding:20px;
+  border:1px solid #d3d3d3;
+  border-radius: 3px;
+  background-color:#fff;
+}
+
+.card-make .upload{
+  position:relative;
+  height:50px;
+}
+
+.card-make .upload .uploadcare-widget-button{
+  position:absolute;
+  top:35px;
+  left:0px;
+}
+
+.card-make .upload .btn-upload{
+  position:absolute;
+  top:18px;
+  right:0;
+  color:#fff;
+  padding:7px 10px;
+  border-radius: 3px;
+  border:none;
+  background-color:#3897f0;
+}
+
+.card-make .content-txt .txt-box{
+  border:none;
+}
+
+.card-make .content-txt{
+  padding:10px;
+  border-bottom:1px solid #d9d9d9;
 }
