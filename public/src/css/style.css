@@ -193,7 +193,7 @@ input.txt-box{
   background-color:#3897f0;
 }
 
-.card-make{
+.card-maker{
   width:560px;
   margin:40px auto 0 auto;
   padding:20px;
@@ -202,18 +202,24 @@ input.txt-box{
   background-color:#fff;
 }
 
-.card-make .upload{
+.card-maker .upload{
   position:relative;
   height:50px;
 }
 
-.card-make .upload .uploadcare-widget-button{
+.card-maker .upload .uploadcare-widget-button{
   position:absolute;
   top:35px;
   left:0px;
 }
 
-.card-make .upload .btn-upload{
+.card-maker .uploadcare-widget.uploadcare-widget-status-loaded{
+  position:absolute;
+  top:28px;
+  left:0px;
+}
+
+.card-maker .upload .btn-upload{
   position:absolute;
   top:18px;
   right:0;
@@ -224,11 +230,11 @@ input.txt-box{
   background-color:#3897f0;
 }
 
-.card-make .content-txt .txt-box{
+.card-maker .content-txt .txt-box{
   border:none;
 }
 
-.card-make .content-txt{
+.card-maker .content-txt{
   padding:10px;
   border-bottom:1px solid #d9d9d9;
 }

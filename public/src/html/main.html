@@ -2,6 +2,8 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/style.css">
+
+
   </head>
   <body>
     <div class="wrap">
@@ -20,7 +22,7 @@
       <div class="container">
         <div class="content">
 
-          <div class="card-make">
+          <div class="card-maker">
             <p class="content-txt">
               <input class="txt-box" placeholder="Add content..."/>
             </p>
@@ -31,43 +33,51 @@
             <input type="hidden" id="photo_url"/>
           </div>
 
-          <article class="main-card">
-            <div class="card-header">
-              <span class="user-profile"></span>
-              <div class="info-box">
-                <a href="#" class="writer">kimseyoon</a>
-              </div>
-            </div>
-            <div class="card-photo">
-              <p class="photo-img"><img src="https://ucarecdn.com/885cc423-9147-4302-8c7f-e08775ba4a89/" alt=""></p>
-            </div>
-            <div class="card-content">
-              <p class="content-box">
-                <span class="writer">min</span>
-                <span class="txt">이쁘게 나왔죠?</span>
-              </p>
-              <p class="comment-info">
-                <span class="total">댓글 10개</span>
-                <a href="#" class="more-btn">더보기</a>
-              </p>
-              <ul class="comment-list">
-                <li>
-                  <a href="#" class="writer">crong</a>
-                  <span class="txt">정말이쁘네요!</span>
-                </li>
-                <li>
-                  <a href="#" class="writer">crong</a>
-                  <span class="txt">정말이쁘네요!</span>
-                </li>
-              </ul>
-              <div class="reply-comment">
-                <div class="txt-box-wrap">
-                  <input class="txt-box" type="text" name="" value="" placeholder="댓글 달기..."/>
-                </div>
+          <div class="main-card-list">
 
-              </div>
-            </div>
-          </article>
+          </div>
+
+
+<script type="main-card-template" id="main-card-template">
+
+  <div class="card-header">
+    <span class="user-profile"></span>
+    <div class="info-box">
+      <a href="#" class="writer">{{email}}</a>
+    </div>
+  </div>
+  <div class="card-photo">
+    <p class="photo-img"><img src="{{picture}}" alt=""></p>
+  </div>
+  <div class="card-content">
+    <p class="content-box">
+      {{content_box}}
+    </p>
+    <p class="comment-info">
+      <span class="total">댓글 {{total_comment}}개</span>
+      <a href="#" class="more-btn">더보기</a>
+    </p>
+    <ul class="comment-list">
+      {{comment_list}}
+    </ul>
+    <div class="reply-comment">
+      <div class="txt-box-wrap">
+        <input class="txt-box" type="text" name="" value="" placeholder="댓글 달기..."/>
+      </div>
+    </div>
+  </div>
+
+
+</script>
+<!--
+<script type="card-comment-template" id="card-comment-template">
+  <li>
+    <a href="#" class="writer">{{writer}}</a>
+    <span class="txt">{{comment}}</span>
+  </li>
+</script>
+-->
+
 
           <a href="#" class="card-more-btn">더 읽어들이기</a>
 
@@ -79,21 +89,17 @@
         </div>
       </footer>
     </div>
-
     <script>
       UPLOADCARE_LOCALE = "en";
       UPLOADCARE_TABS = "file";
       UPLOADCARE_PUBLIC_KEY = "d271d2c7dba74206d488";
     </script>
     <script charset="utf-8" src="http://ucarecdn.com/libs/widget/2.10.3/uploadcare.full.min.js"></script>
-
+    <script type="text/javascript" src="../js/main.js"/>
     <script type="text/javascript">
-      var singleWidget = uploadcare.SingleWidget("[role=uploadcare-uploader]");
 
-      singleWidget.onUploadComplete(function(info){
-        document.querySelector("#photo_url").value = document.querySelector("#photo_url").value + info.cdnUrl;
-      })
     </script>
+
 
   </body>
 </html>
