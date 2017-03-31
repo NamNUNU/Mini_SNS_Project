@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/NamNUNU/SNS_Project/issues"
   },
-  "homepage": "https://github.com/NamNUNU/SNS_Project#readme"
+  "homepage": "https://github.com/NamNUNU/SNS_Project#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "mysql": "^2.13.0"
+  }
 }

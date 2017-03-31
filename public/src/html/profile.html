@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="src/css/style.css">
   <style>
     .profileView {
       text-align: center;
@@ -41,18 +41,26 @@
       padding-bottom: 1rem;
     }
 
+    .pro-article div form {
+      display: inline;
+    }
+
     .pro-article p {
       padding-bottom: 0.5rem;
     }
 
     .pro-cardView {
-      padding: 1rem;
+      padding: 1rem 100px;
     }
 
     .pro-cardView .pro-card {
       padding: 0.5rem;
       width: 200px;
       height: 200px;
+    }
+
+    .pro-card {
+      border-radius: 7%;
     }
   </style>
 </head>
@@ -74,21 +82,33 @@
       <div class="content">
         <div class="profileView">
           <div class="pro-info">
-            <div class="pro-photo"> <img src="" alt="profile photo" /> </div>
+            <div class="pro-photo"> <img class="p-picture" src="" alt="profile photo" /> </div>
             <div class="pro-article">
               <div>
-                <p style="display:inline">{EMAIL}</p>
-                <button>EDIT</button>
+                <p class="p-email" style="display:inline">{EMAIL}</p>
+                
+                <form action="/edit" method="POST">
+                  <input id="hidden_email_value" name="email" type="text" value="{email}" style="display:none">
+                  <input type="submit">
+                </form>
+
               </div>
-              <p>게시물 수 : {all_post_num}</p>
-              <p>{introduce}</p>
+              <p class="p-postCount">게시물 수 : {all_post_num}</p>
+              <p class="p-intro">{introduce}</p>
             </div>
           </div>
-          <div class="pro-cardView"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card" src=""
-              alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card"
-              src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card"
-              src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card" src="" alt="CARD"> <img class="pro-card"
-              src="" alt="CARD"><img class="pro-card" src="" alt="CARD"><img class="pro-card" src="" alt="CARD"> </div>
+          <div class="pro-cardView">
+            <img class="pro-card" src="" alt="CARD">
+            <img class="pro-card" src="" alt="CARD">
+            <img class="pro-card" src="" alt="CARD">
+            <img class="pro-card" src="" alt="CARD">
+            <img class="pro-card" src="" alt="CARD">
+            <img class="pro-card" src="" alt="CARD">
+            <img class="pro-card" src="" alt="CARD">
+            <img class="pro-card" src="" alt="CARD">
+            <img class="pro-card" src="" alt="CARD">
+            <img class="pro-card" src="" alt="CARD">
+          </div>
         </div>
       </div>
     </div>
@@ -98,6 +118,8 @@
       </div>
     </footer>
   </div>
+
+  <script src="src/js/profile.js"></script>
 </body>
 
 </html>

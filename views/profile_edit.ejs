@@ -8,27 +8,27 @@
             text-align: center;
             padding: 4rem;
         }
-        
+
         .pro-edit-article {
             width: 400px;
             margin: 0 auto;
             padding-top: 1rem;
         }
-        
+
         .pro-edit-article div:first-child {
             text-align: justify;
             padding: 1rem;
         }
-        
+
         .pro-edit-article div p {
             padding-bottom: 1rem;
         }
-        
+
         .pro-edit-article .article-list input {
             width: 150px;
             float: right;
         }
-        
+
         .pro-photo {
             display: inline-block;
             border: 1px solid rgba(0, 0, 0, 0.05);
@@ -36,7 +36,7 @@
             border-radius: 100%;
             padding: 5px;
         }
-        
+
         .pro-photo img {
             display: block;
             width: 120px;
@@ -64,23 +64,28 @@
                 <div class="profile_editView">
                     <div class="pro-edit-photo">
                         <div class="pro-photo">
-                            <img src="" alt="profile photo" />
+                            <img class="pro-photo-img" src="<%= imgurl %>" alt="profile photo" />
                         </div>
                     </div>
                     <button>EDIT</button>
-                    <form class="pro-edit-article" action="" method="POST">
+
+                    <div class="pro-edit-article">
                         <div class="article-list">
-                            <p>email : <input type="text"></p>
-                            <p>기존 password : <input type="text"></p>
-                            <p>새로운 password : <input type="text"></p>
-                            <p>새로운 password 확인 : <input type="text"></p>
-                            <p>phone : <input type="text"></p>
-                            <p>introduce : <input type="text"></p>
+                            <p>email :
+                                <%= email %>
+                            </p>
+                            <p>기존 password : <input id="pw" type="text"></p>
+                            <p>새로운 password : <input id="pw_new" type="text"></p>
+                            <p>새로운 password 확인 : <input id="pw_new_check" type="text"></p>
+                            <p>phone : <input id="phone" type="text" value="<%= phone %>"></p>
+                            <p>introduce : <input id="intro" type="text" value="<%= intro %>"></p>
                         </div>
                         <div>
-                            <input type="submit">
+                            <input id="edit_submit" type="submit">
                         </div>
-                    </form>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -90,6 +95,8 @@
             </div>
         </footer>
     </div>
+
+    <script src="src/js/profile_edit.js"></script>
 </body>
 
 </html>
