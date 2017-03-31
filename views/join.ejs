@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="container">
+        <div class="content">
+          <article>
+            <div class="img-wrap">
+
+            </div>
+            <div class="join-wrap">
+              <div class="join-form">
+                <h1 class="brand-name">Codestargram</h1>
+                <form class="join-post" action="/join" method="post">
+                  <input type="text" name="email"  value="이메일을 입력하세요" onclick="this.value='';"><br>
+                  <input type="password" name="pw"><br>
+                  <input type="text" name="phone"><br>
+                  <input type="text" name="intro"><br>
+                  <input type="text" name="picture"><br>
+                  <input class="join-btn" type="submit"/>
+                </form>
+                <section class="message"><%=message%></section>
+              </div>
+            </div>
+          <article>
+        </div>
+      </div>
+      <footer class="footer-wrap">
+        <div class="footer-content">
+          <p class="copy">정보 지원 블로그 관련 기사 채용정보 개인정보 처리방침</p>
+        </div>
+      </footer>
+    </div>
+    <script type="text/javascript">
+    </script>
+  </body>
+</html>
