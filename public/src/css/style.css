@@ -279,8 +279,12 @@ input.txt-box{
 }
 
 .login-wrap .login-form input{
-  margin: 2px auto;
-  font-size:1.2rem;
+  margin: 6px auto;
+  width : 215px;
+  height : 30px;
+  font-size:0.8rem;
+  color: grey;
+  box-shadow: none;
 }
 
 .login-wrap .login-btn{
@@ -362,6 +366,7 @@ input.txt-box{
 
 .join-wrap .join-form{
   width: 350px;
+  height: 544px;
   padding:2px 5px;
   float: right;
   border: 1px solid #d9d9d9;

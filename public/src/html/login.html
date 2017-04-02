@@ -16,8 +16,8 @@
                 <div class="login-form">
                   <h1 class="brand-name">Codestargram</h1>
                   <form class="login-port" action="index.html" method="post">
-                    <input type="text" name="email"><br>
-                    <input type="password" name="pw">
+                    <input id="email" type="text" name="email" value="email"><br>
+                    <input id="password" type="password" name="pw" value="ipsumipsumipsum">
                   </form>
                   <button class="login-btn ajaxsend" type="button">로그인</button>
                   <div class="login-join-form">
@@ -37,6 +37,27 @@
       </div>
     </div>
     <script type="text/javascript">
+      document.querySelector('.login-form').addEventListener('click',function(event){
+        if(event.target.nodeName==="INPUT"){
+          document.getElementById(event.target.id).value = "";
+          document.getElementById(event.target.id).style.color = "black";
+        }
+      })
+      document.querySelector('.login-form').addEventListener('focusout',function(event){
+        if(event.target.value===""){
+          switch(event.target.id){
+            case "email" :
+              document.getElementById(event.target.id).value = "email";
+              document.getElementById(event.target.id).style.color = "grey";
+            break;
+            case "password" :
+              document.getElementById(event.target.id).value = "ipsumipsumipsum";
+              document.getElementById(event.target.id).style.color = "grey";
+            break;
+          }
+        }
+      })
+
       document.querySelector('.ajaxsend').addEventListener('click', function(){
         var email =  document.getElementsByName('email')[0].value;
         var password =  document.getElementsByName('pw')[0].value;
