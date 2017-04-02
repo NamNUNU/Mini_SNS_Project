@@ -40,7 +40,6 @@ passport.use('local-join', new localStrategy({
     var query = connection.query('select * from user where email = ?', [email], function(err, rows){
       if(err) return done(err);
       if(rows.length){
-        console.log('exist user');
         return done(null, false,{message: 'your email is already used'})
       }else{
         var sql = {email:email, pw:password}

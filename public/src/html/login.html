@@ -56,13 +56,12 @@
           var resultDiv = document.querySelector('.result');
 
           if(result.email) {
-            resultDiv.innerHTML = 'welcome '+ result.email +'!!'
+            resultDiv.innerHTML = "<div class='loading'>페이지 로딩 중</div>"
             window.location.href = '/main'
           }
           else if(oReq.status === 400){
-            resultDiv.innerHTML = result + "<div class='sign up'><a href='/join'>Sign up</a></div>"
+            resultDiv.innerHTML += "<div class='warning'> 이메일이나 비밀번호가 틀렸습니다. </div>"
           }
-          else resultDiv.innerHTML =  result;
         });
       }
     </script>
