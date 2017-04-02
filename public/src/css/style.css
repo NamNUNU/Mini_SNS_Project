@@ -24,7 +24,7 @@ input.txt-box{
 .container .content{
   padding:82px 0 58px 0;
   width:1100px;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .header-wrap {
@@ -240,18 +240,42 @@ input.txt-box{
   border-bottom:1px solid #d9d9d9;
 }
 
-.login-wrap .brand-name{
-  margin: 30px auto;
-  font-size: 2rem;
+.login-wrap{
+  width: 900px;
+  margin: 120px auto;
+  overflow: hidden;
+}
+
+.login-wrap .content-wrap{
+  width:730px;
+  margin:0 auto;
+}
+
+.login-wrap .img-wrap{
+  width : 350px;
+  height: 550px;
+  float: left;
+}
+
+.login-wrap .img-wrap .main-img{
+  width : 350px;
+  height: 550px;
+  border-radius: 10px;
 }
 
 .login-wrap .login-form{
   width: 350px;
-  margin: 0 auto;
   padding:2px 5px;
+  float: right;
   border: 1px solid #d9d9d9;
   background-color: #fff;
   text-align: center;
+  border-radius: 10px;
+}
+
+.login-wrap .brand-name{
+  margin: 30px auto;
+  font-size: 2rem;
 }
 
 .login-wrap .login-form input{
@@ -307,18 +331,42 @@ input.txt-box{
   font-size: 0.8rem;
 }
 
-.join-wrap .join-form{
-  width: 350px;
-  height: 530px;
-  margin: auto auto;
-  padding:2px 5px;
-  border: 1px solid #d9d9d9;
-  background-color: #fff;
+.join-wrap{
+  width: 900px;
+  margin: 120px auto;
+  overflow: hidden;
 }
 
 .join-wrap .join-inner{
   width:215px;
   margin: 0 auto;
+}
+
+.join-wrap .content-wrap{
+  width:730px;
+  margin:0 auto;
+}
+
+.join-wrap .img-wrap{
+  width : 350px;
+  height: 550px;
+  float: left;
+}
+
+.join-wrap .img-wrap .main-img{
+  width : 350px;
+  height: 550px;
+
+  border-radius: 10px;
+}
+
+.join-wrap .join-form{
+  width: 350px;
+  padding:2px 5px;
+  float: right;
+  border: 1px solid #d9d9d9;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .join-wrap .brand-name{
