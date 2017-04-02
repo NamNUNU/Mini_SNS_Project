@@ -58,7 +58,7 @@
             window.location.href = '/main'
           }
           else if(oReq.status === 400){
-            resultDiv.innerHTML = result + "<div class='sign up'><a href='/join'>Sign up</a></div>"
+            resultDiv.innerHTML = result + "가입되지 않은 이메일 입니다."
           }
           else resultDiv.innerHTML =  result;
         });

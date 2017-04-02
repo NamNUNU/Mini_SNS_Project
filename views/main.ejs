@@ -22,16 +22,7 @@
 
           <br><br><h3 style="text-align:center">welcome, <%= id %> !!</h3>
 
-          <div class="card-make">
-            <p class="content-txt">
-              <input class="txt-box" placeholder="Add content..."/>
-            </p>
-            <p class="upload">
-              <input type="hidden" role="uploadcare-uploader" data-crop="disabled" data-images-only="true" />
-              <button class="btn-upload" type="button" name="button">글 올리기</button>
-            </p>
-            <input type="hidden" id="photo_url"/>
-          </div>
+
 
           <article class="main-card">
             <div class="card-header">
@@ -82,20 +73,7 @@
       </footer>
     </div>
 
-    <script>
-      UPLOADCARE_LOCALE = "en";
-      UPLOADCARE_TABS = "file";
-      UPLOADCARE_PUBLIC_KEY = "d271d2c7dba74206d488";
-    </script>
-    <script charset="utf-8" src="http://ucarecdn.com/libs/widget/2.10.3/uploadcare.full.min.js"></script>
 
-    <script type="text/javascript">
-      var singleWidget = uploadcare.SingleWidget("[role=uploadcare-uploader]");
-
-      singleWidget.onUploadComplete(function(info){
-        document.querySelector("#photo_url").value = document.querySelector("#photo_url").value + info.cdnUrl;
-      })
-    </script>
 
   </body>
 </html>

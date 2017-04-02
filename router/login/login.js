@@ -43,7 +43,7 @@ passport.use('local-login', new localStrategy({
           return done(null, {'email': email, 'id' :rows[0].uid})
       }else{
           if(err) {throw err};
-          return done(null, false, {'message':'your login info is not found'});
+          return done(null, false, {'message':''});
       }
     })
   }
