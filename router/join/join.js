@@ -50,6 +50,12 @@ passport.use('local-join', new localStrategy({
     if(password!==repw){
       return done(null, false,{message: '확인 비밀번호가 다릅니다'})
     }
+    if(phone==="( - ) 없이 입력하세요"){
+      phone = null;
+    }
+    if(intro==="자기소개를 입력하세요"){
+      intro = null;
+    }
     var query = connection.query('select * from user where email = ?', [email], function(err, rows){
       if(err) return done(err);
       if(rows.length){
