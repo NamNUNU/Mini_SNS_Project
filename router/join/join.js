@@ -37,7 +37,7 @@ passport.use('local-join', new localStrategy({
     passwordField: 'pw',
     passReqToCallback: true
   }, function(req, email, password, done){
-    console.log(password)
+    console.log(what)
     if(email==="이메일을 입력하세요"){
       return done(null, false,{message: '이메일을 입력하셔야 합니다.'})
     }
