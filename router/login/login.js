@@ -15,10 +15,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 router.get('/', function(req, res){
-  var msg;
-  var errMsg = req.flash('error');
-  if(errMsg) msg = errMsg;
-  res.render('login.ejs', {'message' : msg});
+  res.sendFile(path.join(__dirname, "../public/src/html/login.html"));
 })
 
 passport.serializeUser(function(user, done){
@@ -43,7 +40,7 @@ passport.use('local-login', new localStrategy({
           return done(null, {'email': email, 'id' :rows[0].uid})
       }else{
           if(err) {throw err};
-          return done(null, false, {'message':'your login info is not found'});
+          return done(null, false, {'message':''});
       }
     })
   }

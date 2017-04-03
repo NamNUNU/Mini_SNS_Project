@@ -8,32 +8,56 @@
       <div class="container">
         <div class="content">
           <article>
-            <div class="img-wrap">
-
-            </div>
             <div class="login-wrap">
-              <div class="login-form">
-                <h1 class="brand-name">Codestargram</h1>
-                <form class="login-port" action="index.html" method="post">
-                  <input type="text" name="email"><br>
-                  <input type="password" name="password">
-                </form>
-                <button class="login-btn ajaxsend" type="button">로그인</button>
-                <div class="login-join-form">
-                  <p>계정이 없으신가요? <a href="/join">가입하기</a></p>
+              <div class="content-wrap">
+                <div class="img-wrap">
+                  <img class="main-img" src="http://mblogthumb1.phinf.naver.net/20160605_88/wjs7889_1465092774688SX5rP_JPEG/20160601080103_7_1.jpg?type=w2">
+                </div>
+                <div class="login-form">
+                  <h1 class="brand-name">Codestargram</h1>
+                  <form class="login-port" action="index.html" method="post">
+                    <input id="email" type="text" name="email" value="email"><br>
+                    <input id="password" type="password" name="pw" value="ipsumipsumipsum">
+                  </form>
+                  <button class="login-btn ajaxsend" type="button">로그인</button>
+                  <div class="login-join-form">
+                    <p>계정이 없으신가요? <a href="/join">가입하기</a></p>
+                  </div>
+                  <div class="result"></div>
                 </div>
               </div>
             </div>
           <article>
         </div>
+        <footer class="footer-wrap">
+          <div class="footer-content">
+            <p class="copy">정보 지원 블로그 관련 기사 채용정보 개인정보 처리방침</p>
+          </div>
+        </footer>
       </div>
-      <footer class="footer-wrap">
-        <div class="footer-content">
-          <p class="copy">정보 지원 블로그 관련 기사 채용정보 개인정보 처리방침</p>
-        </div>
-      </footer>
     </div>
     <script type="text/javascript">
+      document.querySelector('.login-form').addEventListener('click',function(event){
+        if(event.target.nodeName==="INPUT"){
+          document.getElementById(event.target.id).value = "";
+          document.getElementById(event.target.id).style.color = "black";
+        }
+      })
+      document.querySelector('.login-form').addEventListener('focusout',function(event){
+        if(event.target.value===""){
+          switch(event.target.id){
+            case "email" :
+              document.getElementById(event.target.id).value = "email";
+              document.getElementById(event.target.id).style.color = "grey";
+            break;
+            case "password" :
+              document.getElementById(event.target.id).value = "ipsumipsumipsum";
+              document.getElementById(event.target.id).style.color = "grey";
+            break;
+          }
+        }
+      })
+
       document.querySelector('.ajaxsend').addEventListener('click', function(){
         var email =  document.getElementsByName('email')[0].value;
         var password =  document.getElementsByName('pw')[0].value;
@@ -55,13 +79,12 @@
           var resultDiv = document.querySelector('.result');
 
           if(result.email) {
-            resultDiv.innerHTML = 'welcome '+ result.email +'!!'
+            resultDiv.innerHTML = "<div class='loading'>페이지 로딩 중</div>"
             window.location.href = '/main'
           }
           else if(oReq.status === 400){
-            resultDiv.innerHTML = result + "<div class='sign up'><a href='/join'>Sign up</a></div>"
+            resultDiv.innerHTML += "<div class='warning'> 이메일이나 비밀번호가 틀렸습니다. </div>"
           }
-          else resultDiv.innerHTML =  result;
         });
       }
     </script>

@@ -37,11 +37,17 @@ passport.use('local-join', new localStrategy({
     passwordField: 'pw',
     passReqToCallback: true
   }, function(req, email, password, done){
+    console.log(password)
+    if(email==="이메일을 입력하세요"){
+      return done(null, false,{message: '이메일을 입력하셔야 합니다.'})
+    }
+    if(password==="ipsumipsumipsum"){
+      return done(null, false,{message: '비밀번호를 입력하셔야 합니다.'})
+    }
     var query = connection.query('select * from user where email = ?', [email], function(err, rows){
       if(err) return done(err);
       if(rows.length){
-        console.log('exist user');
-        return done(null, false,{message: 'your email is already used'})
+        return done(null, false,{message: '사용중인 이메일 입니다.'})
       }else{
         var sql = {email:email, pw:password}
         var query = connection.query('insert into user set ?', sql, function(err,rows){
