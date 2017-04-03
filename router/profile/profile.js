@@ -9,8 +9,8 @@ var connection = mysql.createConnection({ //mysql connection
   host: 'localhost',
   port: 3306,
   user: 'root',
-  password: '14858',
-  database: 'sns'
+  password: 'bjh0324',
+  database: 'snstest'
 });
 connection.connect(function (err) { //mysql connection
   if (err) {
@@ -49,8 +49,9 @@ router.post('/edit', function (req, res) {
 
 router.post('/render', function (req, res) {
   var email = req.body.email.replace(/%40/, "@");
-  var query_str = "select user.email, user.picture, user.intro, post.id, post.picture, post.contents from user inner join post on user.email = post.email where user.email = '" + email + "'";
+  var query_str = "select user.email, user.picture as pro_picture, user.intro, post.id, post.picture, post.contents from user inner join post on user.email = post.email where user.email = '" + email + "'";
   var query = connection.query(query_str, function (err, rows) {
+    console.log(rows);
     res.json(rows);
   });
 });
