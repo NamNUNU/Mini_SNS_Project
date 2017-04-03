@@ -10,7 +10,7 @@ var logout = require("./logout/logout");
 var main = require("./main/main");
 
 router.get("/", function(req, res){
-  res.sendFile(path.join(__dirname, "../public/src/html/login.html"));
+  res.render("login.ejs");
 })
 
 app.use(bodyParser.json());
