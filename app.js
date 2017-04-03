@@ -28,5 +28,6 @@ app.use(flash())
 app.use(router);
 
 app.listen(3000, function () {
+  console.log("start server on port 3000");
   console.log("\n" + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds() + " /start server!");
 });

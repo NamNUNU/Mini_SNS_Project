@@ -14,7 +14,7 @@
                   <img class="main-img" src="http://mblogthumb1.phinf.naver.net/20160605_88/wjs7889_1465092774688SX5rP_JPEG/20160601080103_7_1.jpg?type=w2">
                 </div>
                 <div class="login-form">
-                  <h1 class="brand-name">Codestargram</h1>
+                  <h1 class="brand-name"><a class="brand-name" href="/login">Codestargram</a></h1>
                   <form class="login-port" action="index.html" method="post">
                     <input id="email" type="text" name="email" value="email"><br>
                     <input id="password" type="password" name="pw" value="ipsumipsumipsum">
@@ -79,11 +79,10 @@
           var resultDiv = document.querySelector('.result');
 
           if(result.email) {
-            resultDiv.innerHTML = "<div class='loading'>페이지 로딩 중</div>"
             window.location.href = '/main'
           }
           else if(oReq.status === 400){
-            resultDiv.innerHTML += "<div class='warning'> 이메일이나 비밀번호가 틀렸습니다. </div>"
+            resultDiv.innerHTML = "<div class='warning'> 이메일이나 비밀번호가 틀렸습니다. </div>"
           }
         });
       }
