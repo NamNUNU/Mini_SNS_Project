@@ -447,3 +447,113 @@ input.txt-box{
   font-size: 0.8rem;
   color: red;
 }
+
+/*profile style*************************/
+.profileView {
+  text-align: center;
+}
+
+.pro-info {
+  display: inline-flex;
+  padding: 5rem 0 3rem 0;
+  width: 700px;
+  margin: 0 auto;
+}
+
+.pro-info .pro-photo {
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+  padding: 5px;
+}
+
+.pro-info .pro-photo img {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+}
+
+.pro-article {
+  padding: 1.3rem 1rem 1rem 1rem;
+  margin-left: 1rem;
+  width: 100%;
+  text-align: justify;
+}
+
+.pro-article div {
+  padding-bottom: 1rem;
+}
+
+.pro-article div form {
+  display: inline;
+}
+
+.pro-article p {
+  padding-bottom: 0.5rem;
+}
+
+.pro-cardView {
+  padding: 1rem 100px;
+}
+
+.pro-cardView .pro-card {
+  padding: 0.5rem;
+  width: 200px;
+  height: 200px;
+}
+
+.pro-card {
+  border-radius: 7%;
+}
+
+.profile_editView {
+  text-align: center;
+  padding: 4rem;
+}
+
+.pro-edit-article {
+  width: 400px;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.pro-edit-article div:first-child {
+  text-align: justify;
+  padding: 1rem;
+}
+
+.pro-edit-article div p {
+  padding-bottom: 1rem;
+}
+
+.pro-edit-article .article-list input {
+  width: 150px;
+  float: right;
+}
+
+.pro-photo {
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+  padding: 5px;
+}
+
+.pro-photo img {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+}
+
+.pro-result {
+  text-align: center;
+}
+
+.pro-result .pro-result-msg {
+  font-size: 2rem;
+  padding: 5rem 3rem;
+}
+/********************************/
