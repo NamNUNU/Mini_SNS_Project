@@ -9,16 +9,13 @@
   <div class="wrap">
     <header class="header-wrap">
       <div class="header-content">
-        <h1 class="h-logo"><a href="">Codestagram</a></h1>
-        <!---->
+        <h1 class="h-logo"><a href="/main">Codestagram</a></h1>
         <form class="search-box" action="/profile" post="get">
-            <input name="search" type="search" class="txt-box" />
+          <input name="search" type="search" class="txt-box" />
         </form>
-        <!---->
-          <ul class="util">
-            <li>profile</li>
-            <li>log-out</li>
-          </ul>
+        <ul class="util">
+          <li>profile</li>
+          <li><a href="/logout">log-out</a></li>
         </ul>
       </div>
     </header>
@@ -30,7 +27,7 @@
             <div class="pro-article">
               <div>
                 <p class="p-email" style="display:inline">{EMAIL}</p>
-                
+
                 <form action="/profile/edit" method="POST">
                   <input id="hidden_email_value" name="email" type="text" value="{email}" style="display:none">
                   <input type="submit">
