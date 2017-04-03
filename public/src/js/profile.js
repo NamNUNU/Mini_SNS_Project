@@ -48,7 +48,7 @@ ns.view = {
     console.log("view > render", data);
     var email = data[0].email;
     var intro = data[0].intro;
-    var picture = 'http://static.naver.net/newsstand/2017/0313/article_img/9054/173200/001.jpg';
+    var picture = data[0].pro_picture;
     document.querySelector(".p-picture").src = picture;
     document.querySelector(".p-email").innerHTML = email;
     document.querySelector(".p-intro").innerHTML = intro;

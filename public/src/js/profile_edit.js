@@ -59,3 +59,9 @@ document.querySelector("#edit_submit").addEventListener("click", function () {
     alert("새로운 비밀번호와 확인이 일치하지 않습니다.")
   }
 });
+
+document.querySelector(".profile_editView").addEventListener("DOMSubtreeModified", function () {
+  if (document.querySelector(".uploadcare-widget-file-name") != null) {
+    document.querySelector(".pro-photo-img").src = document.querySelector(".profile_editView button").value
+  }
+});
