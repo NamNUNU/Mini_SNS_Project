@@ -3,66 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="src/css/style.css">
-  <style>
-    .profileView {
-      text-align: center;
-    }
-
-    .pro-info {
-      display: inline-flex;
-      padding: 5rem 0 3rem 0;
-      width: 700px;
-      margin: 0 auto;
-    }
-
-    .pro-info .pro-photo {
-      display: inline-block;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 100%;
-      padding: 5px;
-    }
-
-    .pro-info .pro-photo img {
-      display: block;
-      width: 120px;
-      height: 120px;
-      border-radius: 100%;
-    }
-
-    .pro-article {
-      padding: 1.3rem 1rem 1rem 1rem;
-      margin-left: 1rem;
-      width: 100%;
-      text-align: justify;
-    }
-
-    .pro-article div {
-      padding-bottom: 1rem;
-    }
-
-    .pro-article div form {
-      display: inline;
-    }
-
-    .pro-article p {
-      padding-bottom: 0.5rem;
-    }
-
-    .pro-cardView {
-      padding: 1rem 100px;
-    }
-
-    .pro-cardView .pro-card {
-      padding: 0.5rem;
-      width: 200px;
-      height: 200px;
-    }
-
-    .pro-card {
-      border-radius: 7%;
-    }
-  </style>
 </head>
 
 <body>
@@ -87,7 +27,7 @@
               <div>
                 <p class="p-email" style="display:inline">{EMAIL}</p>
                 
-                <form action="/edit" method="POST">
+                <form action="/profile/edit" method="POST">
                   <input id="hidden_email_value" name="email" type="text" value="{email}" style="display:none">
                   <input type="submit">
                 </form>

@@ -1,12 +1,15 @@
 var ns = {}; //name space
 
 ns.util = {
-  testAjax: function (url, fn) {
+  ajax: function (url, fn) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send();
-
+    var email = window.document.URL.split("=")[1];
+    var email_json = {
+      email: email
+    };
+    xhr.send(JSON.stringify(email_json));
     xhr.addEventListener('load', function () {
       var data = JSON.parse(xhr.responseText); //서버를 통해 받은 데이터, json object로 변환
       console.log("xhr.addEventListener('load', function () {", data); //데이터가 잘 넘어왔는지 확인
@@ -96,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  ns.util.testAjax("http://localhost:3000/test", function (result) {
+  ns.util.ajax("http://localhost:3000/profile/render", function (result) {
     ns.dispatcher.emit({
       "type": "initView"
     }, [result]);

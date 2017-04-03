@@ -37,14 +37,23 @@ document.querySelector("#edit_submit").addEventListener("click", function () {
       }
     }
 
-
-
     data = JSON.stringify(data);
-    var url = "/profile_edit_submit";
+    var url = "/profile/edit_submit";
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(data);
+
+    xhr.addEventListener('load', function () {
+      var reqData = xhr.responseText; //서버를 통해 받은 데이터, json object로 변환
+      console.log(".. util > sendAjax", reqData); //데이터가 잘 넘어왔는지 확인
+      if (reqData !== "fail") {
+        alert("정상적으로 프로필이 변경되었습니다.");
+        history.go(-1);
+      } else {
+        alert("기존 비밀번호가 틀렸습니다, 다시 확인해주세요.");
+      }
+    });
 
   } else {
     alert("새로운 비밀번호와 확인이 일치하지 않습니다.")
