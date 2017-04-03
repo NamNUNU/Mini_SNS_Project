@@ -79,7 +79,6 @@
           var resultDiv = document.querySelector('.result');
 
           if(result.email) {
-            resultDiv.innerHTML = "<div class='loading'>페이지 로딩 중</div>"
             window.location.href = '/main'
           }
           else if(oReq.status === 400){

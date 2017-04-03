@@ -44,6 +44,9 @@ passport.use('local-join', new localStrategy({
     if(email==="이메일을 입력하세요"){
       return done(null, false,{message: '이메일을 입력하셔야 합니다.'})
     }
+    if(email.indexOf('@')===-1||email.indexOf('.')===-1){
+      return done(null, false,{message: '이메일을 양식에 맞게 입력하셔야 합니다.'})
+    }
     if(password==="ipsumipsumipsum"){
       return done(null, false,{message: '비밀번호를 입력하셔야 합니다.'})
     }

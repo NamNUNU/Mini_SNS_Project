@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 
 var join = require("./join/join");
 var login = require("./login/login");
+var logout = require("./logout/logout");
 var main = require("./main/main");
 
 router.get("/", function(req, res){
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 router.use('/join', join);
 router.use('/login', login);
+router.use('/logout', logout);
 router.use('/main', main);
 
 module.exports = router;
