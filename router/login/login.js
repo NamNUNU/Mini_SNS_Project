@@ -15,7 +15,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 router.get('/', function(req, res){
-  res.sendFile(path.join(__dirname, "../public/src/html/login.html"));
+  res.render('login.ejs')
 })
 
 passport.serializeUser(function(user, done){
