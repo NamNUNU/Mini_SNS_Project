@@ -24,7 +24,7 @@ input.txt-box{
 .container .content{
   padding:82px 0 58px 0;
   width:1100px;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .header-wrap {
@@ -194,7 +194,7 @@ input.txt-box{
   background-color:#3897f0;
 }
 
-.card-make{
+.card-maker{
   width:560px;
   margin:40px auto 0 auto;
   padding:20px;
@@ -203,18 +203,24 @@ input.txt-box{
   background-color:#fff;
 }
 
-.card-make .upload{
+.card-maker .upload{
   position:relative;
   height:50px;
 }
 
-.card-make .upload .uploadcare-widget-button{
+.card-maker .upload .uploadcare-widget-button{
   position:absolute;
   top:35px;
   left:0px;
 }
 
-.card-make .upload .btn-upload{
+.card-maker .uploadcare-widget.uploadcare-widget-status-loaded{
+  position:absolute;
+  top:28px;
+  left:0px;
+}
+
+.card-maker .upload .btn-upload{
   position:absolute;
   top:18px;
   right:0;
@@ -225,13 +231,46 @@ input.txt-box{
   background-color:#3897f0;
 }
 
-.card-make .content-txt .txt-box{
+.card-maker .content-txt .txt-box{
   border:none;
 }
 
-.card-make .content-txt{
+.card-maker .content-txt{
   padding:10px;
   border-bottom:1px solid #d9d9d9;
+}
+
+.login-wrap{
+  width: 900px;
+  margin: 120px auto;
+  overflow: hidden;
+}
+
+.login-wrap .content-wrap{
+  width:730px;
+  margin:0 auto;
+}
+
+.login-wrap .img-wrap{
+  width : 350px;
+  height: 550px;
+  float: left;
+}
+
+.login-wrap .img-wrap .main-img{
+  width : 350px;
+  height: 550px;
+  border-radius: 10px;
+}
+
+.login-wrap .login-form{
+  width: 350px;
+  padding:2px 5px;
+  float: right;
+  border: 1px solid #d9d9d9;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 10px;
 }
 
 .login-wrap .brand-name{
@@ -239,18 +278,13 @@ input.txt-box{
   font-size: 2rem;
 }
 
-.login-wrap .login-form{
-  width: 350px;
-  margin: 0 auto;
-  padding:2px 5px;
-  border: 1px solid #d9d9d9;
-  background-color: #fff;
-  text-align: center;
-}
-
 .login-wrap .login-form input{
-  margin: 2px auto;
-  font-size:1.2rem;
+  margin: 6px auto;
+  width : 215px;
+  height : 30px;
+  font-size:0.8rem;
+  color: grey;
+  box-shadow: none;
 }
 
 .login-wrap .login-btn{
@@ -285,4 +319,131 @@ input.txt-box{
 .login-wrap .login-btn:active{
   position:relative;
 	top:1px;
+}
+
+.login-wrap .login-join-form{
+  margin-bottom: 10px;
+}
+
+.login-wrap .warning{
+  color: red;
+  font-size: 0.8rem;
+}
+
+.login-wrap .loading{
+  color:blue;
+  font-size: 0.8rem;
+}
+
+.join-wrap{
+  width: 900px;
+  margin: 120px auto;
+  overflow: hidden;
+}
+
+.join-wrap .join-inner{
+  width:215px;
+  margin: 0 auto;
+}
+
+.join-wrap .content-wrap{
+  width:730px;
+  margin:0 auto;
+}
+
+.join-wrap .img-wrap{
+  width : 350px;
+  height: 550px;
+  float: left;
+}
+
+.join-wrap .img-wrap .main-img{
+  width : 350px;
+  height: 550px;
+
+  border-radius: 10px;
+}
+
+.join-wrap .join-form{
+  width: 350px;
+  height: 544px;
+  padding:2px 5px;
+  float: right;
+  border: 1px solid #d9d9d9;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.join-wrap .brand-name{
+  margin: 30px auto;
+  font-size: 2rem;
+}
+
+.join-wrap .input-text-wrap{
+  margin-top:50px;
+}
+
+.join-wrap .join-form .input-text-wrap input{
+  margin: 2px auto;
+  width : 215px;
+  height : 30px;
+  font-size:0.8rem;
+  color: grey;
+  box-shadow: none;
+}
+
+.join-wrap .input-text-wrap .confirm-pw{
+  font-size: 0.8em;
+  margin-top: 10px;
+}
+
+.join-wrap .join-text{
+  font-size: 0.8rem;
+  margin-top:10px;
+}
+
+.join-wrap .join-btn-wrap{
+  margin-top: 20px;
+}
+
+.join-wrap .join-btn{
+  width: 215px;
+  -moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5));
+	background:-moz-linear-gradient(top, #79bbff 5%, #378de5 100%);
+	background:-webkit-linear-gradient(top, #79bbff 5%, #378de5 100%);
+	background:-o-linear-gradient(top, #79bbff 5%, #378de5 100%);
+	background:-ms-linear-gradient(top, #79bbff 5%, #378de5 100%);
+	background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5',GradientType=0);
+	background-color:#79bbff;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	cursor:pointer;
+	color: #fff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
+}
+
+.join-wrap .join-btn:active{
+  position:relative;
+	top:1px;
+}
+
+
+.join-wrap .message {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: -10px;
+  font-size: 0.8rem;
+  color: red;
 }
