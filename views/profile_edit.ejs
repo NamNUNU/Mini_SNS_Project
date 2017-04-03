@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="header-wrap">
+            <div class="header-content">
+                <h1 class="h-logo"><a href="">Codestagram</a></h1>
+        <!---->
+        <form class="search-box" action="/profile" post="get">
+            <input name="search" type="search" class="txt-box" />
+        </form>
+        <!---->
+          <ul class="util">
+            <li>profile</li>
+            <li>log-out</li>
+          </ul>
+            </div>
+        </header>
+        <div class="container">
+            <div class="content">
+                <div class="profile_editView">
+                    <div class="pro-edit-photo">
+                        <div class="pro-photo">
+                            <img class="pro-photo-img" src="<%= imgurl %>" alt="profile photo" />
+                        </div>
+                    </div>
+                    <button>EDIT</button>
+
+                    <div class="pro-edit-article">
+                        <div class="article-list">
+                            <p>email :
+                                <%= email %>
+                            </p>
+                            <p>기존 password : <input id="pw" type="text"></p>
+                            <p>새로운 password : <input id="pw_new" type="text"></p>
+                            <p>새로운 password 확인 : <input id="pw_new_check" type="text"></p>
+                            <p>phone : <input id="phone" type="text" value="<%= phone %>"></p>
+                            <p>introduce : <input id="intro" type="text" value="<%= intro %>"></p>
+                        </div>
+                        <div>
+                            <input id="edit_submit" type="submit">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer-wrap">
+            <div class="footer-content">
+                <p class="copy">정보 지원 블로그 관련 기사 채용정보 개인정보 처리방침</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../js/profile_edit.js"></script>
+</body>
+
+</html>
