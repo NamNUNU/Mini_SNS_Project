@@ -160,6 +160,7 @@ input.txt-box{
 }
 
 .main-card .card-content .comment-list li{
+  position:relative;
   margin-top:5px;
 }
 
@@ -170,6 +171,16 @@ input.txt-box{
 .main-card .card-content .comment-list li .writer{
   margin-right:5px;
   font-weight: bold;
+}
+
+.main-card .card-content .comment-list li .btnCommentDel{
+  position:absolute;
+  top:0;
+  right:0;
+  cursor: pointer;
+  padding:2px;
+  border:none;
+  background-color: #fff;
 }
 
 .main-card .card-content .reply-comment{

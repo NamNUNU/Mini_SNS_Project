@@ -21,10 +21,19 @@ CardMaker.prototype = {
 
   makeCard : function(){
     this.mainCardData.picture = util.$(".card-maker #photo_url").value;
-    this.mainCardData.content = util.$(".card-maker .txt-box").value;
-    this.mainCardData.email = "kimse";
-    mainCard.init(this.mainCardData);
-    this.clearCardMaker();
+    this.mainCardData.contents = util.$(".card-maker .txt-box").value;
+    this.mainCardData.email = util.$("#loginId").value;
+
+    if(this.mainCardData.picture === ""){
+      return;
+    }
+
+    util.runAjax(function(e){
+      var cardId = JSON.parse(e.target.responseText);
+      this.mainCardData.id = cardId;
+      mainCard.init(this.mainCardData);
+      this.clearCardMaker();
+    }.bind(this), "POST", "http://localhost:3000/main/cards", this.mainCardData);
   },
 
   clearCardMaker : function(){
@@ -61,8 +70,12 @@ mainCard = (function(){
     regEvent : function(card){
       card.addEventListener("click", function(e){
         var target = e.target;
+        e.preventDefault();
         //console.log(target);
-      })
+        if(target.classList.contains("btnCommentDel")){
+          this.deleteComment(target.parentElement);
+        }
+      }.bind(this))
 
       card.addEventListener('keypress', function (e) {
         var target = e.target;
@@ -76,16 +89,30 @@ mainCard = (function(){
     },
 
     replyComment : function(mainCard){
-      var commentValue = mainCard.querySelector(".reply-comment .txt-box").value;
-      var commentList = mainCard.querySelector(".main-card .comment-list");
+      var commentData = {};
+      commentData.comment = mainCard.querySelector(".reply-comment .txt-box").value;
+      commentData.email = util.$("#loginId").value;
+      commentData.p_id = mainCard.getAttribute("data-id");
+
+      var commentList = mainCard.querySelector(".comment-list");
       var li = document.createElement("LI");
-      li.innerHTML = "<a href='#' class='writer'>"+"kimse"+"</a><span class='txt'>"+commentValue+"</span>"
-      commentList.appendChild(li);
-      mainCard.querySelector(".reply-comment .txt-box").value = "";
+      li.innerHTML = "<a href='#' class='writer'>"+commentData.email+"</a><span class='txt'>"+commentData.comment+"</span><button class='btnCommentDel'>X</button>"
+
+      util.runAjax(function(e){
+        var data = e.target.responseText;
+        commentList.appendChild(li);
+        mainCard.querySelector(".comment-info .total .num").innerHTML = commentList.childElementCount;
+        mainCard.querySelector(".reply-comment .txt-box").value = "";
+      }, "POST", "http://localhost:3000/main/cards/comment", commentData)
     },
 
-    deleteComment : function(){
-
+    deleteComment : function(ele){
+      var commentData = {};
+      ele.closest(".comment-list").removeChild(ele);
+      commentData.id = ele.getAttribute("data-id");
+      util.runAjax(function(e){
+        var data = e.target.responseText;
+      }, "DELETE", "http://localhost:3000/main/cards/comment", commentData);
     },
 
     moreComment : function(){
@@ -96,19 +123,26 @@ mainCard = (function(){
       var mainCardTemplate = util.$("#main-card-template").innerHTML;
       var result = "";
 
+      var loginId = util.$("#loginId").value;
+
+
       result = mainCardTemplate.replace("{{email}}", data.email)
                                 .replace("{{picture}}", data.picture)
 
       var contentBox = "";
       if(data.content !== ""){
-        contentBox += "<span class='writer'>"+data.email+"</span><span class='txt'>"+data.content+"</span>"
+        contentBox += "<span class='writer'>"+data.email+"</span><span class='txt'>"+data.contents+"</span>"
       }
       result = result.replace("{{content_box}}", contentBox)
 
       var commentList = "";
       if(data.comments !== undefined){
         for(var i = 0; i < data.comments.length ;i++){
-          commentList += "<li><a href='#' class='writer'>"+data.comments[i].email+"</a><span class='txt'>"+data.comments[i].comment+"</span></li>"
+          if(data.comments[i].email === loginId){
+            commentList += "<li data-id = '"+data.comments[i].id+"'><a href='#' class='writer'>"+data.comments[i].email+"</a><span class='txt'>"+data.comments[i].comment+"</span><button class='btnCommentDel'>X</button></li>"
+          }else{
+            commentList += "<li data-id = '"+data.comments[i].id+"'><a href='#' class='writer'>"+data.comments[i].email+"</a><span class='txt'>"+data.comments[i].comment+"</span></li>"
+          }
         }
         result = result.replace("{{comment_list}}", commentList)
                         .replace("{{total_comment}}", data.comments.length)
@@ -119,6 +153,7 @@ mainCard = (function(){
 
       var mainCard = document.createElement("ARTICLE");
       mainCard.classList.add("main-card");
+      mainCard.setAttribute("data-id", data.id);
       mainCard.innerHTML = result;
       this.mainCardList.insertBefore(mainCard, this.mainCardList.firstChild);
       return mainCard;
@@ -190,7 +225,7 @@ var util = {
 
     if(method === "GET"){
       oReq.send();
-    }else if(method === "POST"){
+    }else{
       data = JSON.stringify(data);
       oReq.setRequestHeader("content-Type", "application/json");
       oReq.send(data);
@@ -210,6 +245,7 @@ document.addEventListener("DOMContentLoaded", function(){
     for(var i = 0; i < data.length; i++){
       mainCard.init(data[i]);
     }
-  }, "GET", " http://localhost:8000/public/src/js/data.json")
+  }, "GET", "http://localhost:3000/main/cards")
 
 });
+//http://localhost:3000/public/src/js/data.json
