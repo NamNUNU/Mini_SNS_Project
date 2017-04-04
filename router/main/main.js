@@ -19,7 +19,7 @@ router.get('/', function(req, res){
   if(!id) res.render('login.ejs');
 
   var responseData = {};
-  var query =  connection.query('select email from user where uid="'+ id +'"', function(err,rows){
+  var query =  connection.query('select email from user where id="'+ id +'"', function(err,rows){
     if(err) throw err;
     if(rows[0]){
       //console.log(rows);

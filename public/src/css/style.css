@@ -24,7 +24,7 @@ input.txt-box{
 .container .content{
   padding:82px 0 58px 0;
   width:1100px;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .header-wrap {
@@ -251,23 +251,51 @@ input.txt-box{
   border-bottom:1px solid #d9d9d9;
 }
 
+.login-wrap{
+  width: 900px;
+  margin: 120px auto;
+  overflow: hidden;
+}
+
+.login-wrap .content-wrap{
+  width:730px;
+  margin:0 auto;
+}
+
+.login-wrap .img-wrap{
+  width : 350px;
+  height: 550px;
+  float: left;
+}
+
+.login-wrap .img-wrap .main-img{
+  width : 350px;
+  height: 550px;
+  border-radius: 10px;
+}
+
+.login-wrap .login-form{
+  width: 350px;
+  padding:2px 5px;
+  float: right;
+  border: 1px solid #d9d9d9;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 10px;
+}
+
 .login-wrap .brand-name{
   margin: 30px auto;
   font-size: 2rem;
 }
 
-.login-wrap .login-form{
-  width: 350px;
-  margin: 0 auto;
-  padding:2px 5px;
-  border: 1px solid #d9d9d9;
-  background-color: #fff;
-  text-align: center;
-}
-
 .login-wrap .login-form input{
-  margin: 2px auto;
-  font-size:1.2rem;
+  margin: 6px auto;
+  width : 215px;
+  height : 30px;
+  font-size:0.8rem;
+  color: grey;
+  box-shadow: none;
 }
 
 .login-wrap .login-btn{
@@ -308,26 +336,85 @@ input.txt-box{
   margin-bottom: 10px;
 }
 
+.login-wrap .warning{
+  color: red;
+  font-size: 0.8rem;
+}
+
+.login-wrap .loading{
+  color:blue;
+  font-size: 0.8rem;
+}
+
+.join-wrap{
+  width: 900px;
+  margin: 120px auto;
+  overflow: hidden;
+}
+
+.join-wrap .join-inner{
+  width:215px;
+  margin: 0 auto;
+}
+
+.join-wrap .content-wrap{
+  width:730px;
+  margin:0 auto;
+}
+
+.join-wrap .img-wrap{
+  width : 350px;
+  height: 550px;
+  float: left;
+}
+
+.join-wrap .img-wrap .main-img{
+  width : 350px;
+  height: 550px;
+
+  border-radius: 10px;
+}
+
+.join-wrap .join-form{
+  width: 350px;
+  height: 544px;
+  padding:2px 5px;
+  float: right;
+  border: 1px solid #d9d9d9;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
 .join-wrap .brand-name{
   margin: 30px auto;
   font-size: 2rem;
 }
 
-.join-wrap .join-form{
-  width: 350px;
-  margin: 0 auto;
-  padding:2px 5px;
-  border: 1px solid #d9d9d9;
-  background-color: #fff;
-  text-align: center;
+.join-wrap .input-text-wrap{
+  margin-top:50px;
 }
 
-.join-wrap .join-form input{
+.join-wrap .join-form .input-text-wrap input{
   margin: 2px auto;
   width : 215px;
   height : 30px;
   font-size:0.8rem;
+  color: grey;
   box-shadow: none;
+}
+
+.join-wrap .input-text-wrap .confirm-pw{
+  font-size: 0.8em;
+  margin-top: 10px;
+}
+
+.join-wrap .join-text{
+  font-size: 0.8rem;
+  margin-top:10px;
+}
+
+.join-wrap .join-btn-wrap{
+  margin-top: 20px;
 }
 
 .join-wrap .join-btn{
@@ -349,7 +436,7 @@ input.txt-box{
 	border:1px solid #84bbf3;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
+	color: #fff;
 	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
@@ -365,5 +452,119 @@ input.txt-box{
 
 
 .join-wrap .message {
-  margin-bottom: 10px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: -10px;
+  font-size: 0.8rem;
+  color: red;
 }
+
+/*profile style*************************/
+.profileView {
+  text-align: center;
+}
+
+.pro-info {
+  display: inline-flex;
+  padding: 5rem 0 3rem 0;
+  width: 700px;
+  margin: 0 auto;
+}
+
+.pro-info .pro-photo {
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+  padding: 5px;
+}
+
+.pro-info .pro-photo img {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+}
+
+.pro-article {
+  padding: 1.3rem 1rem 1rem 1rem;
+  margin-left: 1rem;
+  width: 100%;
+  text-align: justify;
+}
+
+.pro-article div {
+  padding-bottom: 1rem;
+}
+
+.pro-article div form {
+  display: inline;
+}
+
+.pro-article p {
+  padding-bottom: 0.5rem;
+}
+
+.pro-cardView {
+  padding: 1rem 100px;
+}
+
+.pro-cardView .pro-card {
+  padding: 0.5rem;
+  width: 200px;
+  height: 200px;
+}
+
+.pro-card {
+  border-radius: 7%;
+}
+
+.profile_editView {
+  text-align: center;
+  padding: 4rem;
+}
+
+.pro-edit-article {
+  width: 400px;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.pro-edit-article div:first-child {
+  text-align: justify;
+  padding: 1rem;
+}
+
+.pro-edit-article div p {
+  padding-bottom: 1rem;
+}
+
+.pro-edit-article .article-list input {
+  width: 150px;
+  float: right;
+}
+
+.pro-photo {
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+  padding: 5px;
+}
+
+.pro-photo img {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+}
+
+.pro-result {
+  text-align: center;
+}
+
+.pro-result .pro-result-msg {
+  font-size: 2rem;
+  padding: 5rem 3rem;
+}
+/********************************/
