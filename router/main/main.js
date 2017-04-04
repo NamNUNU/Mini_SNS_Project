@@ -8,7 +8,7 @@ var mysql = require("mysql")
 var connection = mysql.createConnection({
   host : "localhost",
   user : "root",
-  password : "14858",
+  password : "1234",
   database : "sns"
 })
 connection.connect();
@@ -22,7 +22,7 @@ router.get('/', function(req, res){
   var query =  connection.query('select email from user where id="'+ id +'"', function(err,rows){
     if(err) throw err;
     if(rows[0]){
-      console.log(rows);
+      //console.log(rows);
       responseData.result = "ok";
       responseData.email = rows[0].email;
     }else{
@@ -34,6 +34,70 @@ router.get('/', function(req, res){
   })
 })
 
+router.get('/cards', function(req, res){
+  var post;
+  var comments;
+  var postSql = 'select id, email, picture, contents from post'
+  var commentsSql = 'select p_id, email, id, comment from comments'
+  connection.query(postSql, function(err, rows){
+    if(err) throw err;
+    post = rows
+    connection.query(commentsSql, function(err, rows){
+      if(err) throw err;
+      comments = rows;
+      for(var i = 0; i < post.length; i++){
+        post[i].comments = [];
+        for(var x = 0; x < comments.length; x++){
+          if(post[i].id === comments[x].p_id){
+            post[i].comments.push({
+              "email" : comments[x].email,
+              "comment" : comments[x].comment,
+              "id" : comments[x].id
+            })
+          }
+        }
+      }
+      res.json(post);
+    })
+  })
+})
 
+// card maker가 card를 생성할 때
+router.post('/cards', function(req, res){
+  //console.log(req.user);
+  var email = req.body.email;
+  var picture = req.body.picture;
+  var contents = req.body.contents;
+  var sql = 'insert into post(email, picture, contents) values(?, ?, ?)';
+  var params = [email, picture, contents];
+  connection.query(sql, params, function(err, rows){
+    if(err) throw err;
+    res.json(rows.insertId);
+  })
+})
+
+router.post('/cards/comment', function(req, res){
+  var email = req.body.email;
+  var comment = req.body.comment;
+  var p_id = req.body.p_id;
+  var sql = 'insert into comments(p_id, email, comment) values(?, ?, ?)';
+  var params = [p_id, email, comment];
+  connection.query(sql, params, function(err, rows){
+    if(err) throw err;
+    res.json(rows.insertId);
+  })
+})
+
+router.delete('/cards/comment', function(req, res){
+  //console.log(req.body.id)
+
+  var id = req.body.id;
+  var sql = 'delete from comments where id = ?'
+  var params = [id];
+  connection.query(sql, params, function(err, rows){
+    if(err) throw err;
+    //console.log(rows);
+  })
+})
 
 module.exports = router;
