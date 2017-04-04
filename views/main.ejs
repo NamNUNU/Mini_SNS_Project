@@ -7,6 +7,7 @@
   </head>
   <body>
     <div class="wrap">
+      <!--
       <header class="header-wrap">
         <div class="header-content">
           <h1 class="h-logo"><a href="">Codestagram</a></h1>
@@ -19,6 +20,11 @@
           </ul>
         </div>
       </header>
+-->
+      <header class="header-wrap">
+          <% include ./template/header %>
+      </header>
+
       <div class="container">
         <div class="content">
 
@@ -82,15 +88,22 @@
 -->
 
 
-          <a href="#" class="card-more-btn">더 읽어들이기</a>
+          
 
         </div>
       </div>
+
+      <footer class="footer-wrap">
+          <% include ./template/footer %>
+      </footer>
+
+      <!--
       <footer class="footer-wrap">
         <div class="footer-content">
           <p class="copy">정보 지원 블로그 관련 기사 채용정보 개인정보 처리방침</p>
         </div>
       </footer>
+    -->
     </div>
     <script>
       UPLOADCARE_LOCALE = "en";

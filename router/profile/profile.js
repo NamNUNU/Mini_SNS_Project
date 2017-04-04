@@ -7,10 +7,10 @@ var bodyParser = require("body-parser");
 var mysql = require('mysql'); //mysql
 var connection = mysql.createConnection({ //mysql connection
   host: 'localhost',
-  port: 3306,
+  //port: 3306,
   user: 'root',
-  password: 'bjh0324',
-  database: 'snstest'
+  password: '1234',
+  database: 'sns'
 });
 connection.connect(function (err) { //mysql connection
   if (err) {
