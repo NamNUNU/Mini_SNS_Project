@@ -415,6 +415,11 @@ input.txt-box{
   margin-top:10px;
 }
 
+.box-wrap .picture-wrap{
+  margin:20px 0px 35px 0px;
+  text-align: center;
+}
+
 .box-wrap .join-btn-wrap{
   margin-top: 20px;
 }

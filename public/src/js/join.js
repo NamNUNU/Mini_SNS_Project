@@ -45,3 +45,11 @@ document.querySelector('.input-text-wrap').addEventListener('focusout',function(
   })
 
 })
+
+document.addEventListener("DOMContentLoaded", function(){
+  var singleWidget = uploadcare.SingleWidget("[role=uploadcare-uploader]");
+  singleWidget.onUploadComplete(function(info){
+    document.querySelector("#picture").value = document.querySelector("#picture").value + info.cdnUrl;
+  })
+
+});

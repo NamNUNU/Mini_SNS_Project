@@ -9,7 +9,7 @@ var localStrategy = require("passport-local").Strategy;
 var connection = mysql.createConnection({
   host : "localhost",
   user : "root",
-  password : "1234",
+  password : "14858",
   database : "sns"
 })
 connection.connect();
@@ -40,6 +40,8 @@ passport.use('local-join', new localStrategy({
     var phone = req.body.phone;
     var intro = req.body.intro;
     var repw = req.body.repw;
+    var picture = req.body.picture;
+
 
     if(email==="이메일을 입력하세요"){
       return done(null, false,{message: '이메일을 입력하셔야 합니다.'})
@@ -64,7 +66,7 @@ passport.use('local-join', new localStrategy({
       if(rows.length){
         return done(null, false,{message: '사용중인 이메일 입니다.'})
       }else{
-        var sql = {email:email, pw:password, phone:phone, intro:intro}
+        var sql = {email:email, pw:password, phone:phone, intro:intro, picture:picture}
         var query = connection.query('insert into user set ?', sql, function(err,rows){
           if(err) {throw err};
           return done(null, {'email':email,'id' :rows.insertId})

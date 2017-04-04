@@ -16,7 +16,9 @@
                 <div class="join-text">한줄 소개</div>
                 <input id="intro" type="textarea" name="intro" value="자기소개를 입력하세요"><br>
                 <div class="join-text">사진</div>
-                <input id="picture" type="text" name="picture"><br>
+                <div class="picture-wrap">
+                  <input id="picture" type="hidden" name="picture" role="uploadcare-uploader" data-crop="disabled" data-images-only="true" />
+                </div>
               </div>
 
               <section class="message"><%=message%></section>
