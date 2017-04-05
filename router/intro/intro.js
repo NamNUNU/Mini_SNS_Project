@@ -1,9 +1,10 @@
 var express = require("express")
 var app = express();
 var router = express.Router();
-var mysql = require("mysql")
-var passport = require("passport")
+var mysql = require("mysql");
+var passport = require("passport");
 var localStrategy = require("passport-local").Strategy;
+
 
 // DATABASE SETTING
 var connection = mysql.createConnection({
@@ -15,10 +16,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 router.get('/', function(req, res){
-  var msg;
-  var errMsg = req.flash('error');
-  if(errMsg) msg = errMsg;
-  res.render('join.ejs', {'message' : msg});
+  res.render('intro.ejs',{message:""})
 })
 
 passport.serializeUser(function(user, done){
@@ -31,6 +29,35 @@ passport.deserializeUser(function(id, done){
   done(null, id);
 });
 
+
+passport.use('local-login', new localStrategy({
+    usernameField: 'email',
+    passwordField: 'pw',
+    passReqToCallback: true
+  }, function(req, email, password, done){
+    var query = connection.query('select * from user where email = ? and pw = ?', [email, password], function(err, rows){
+      if(err) return done(err);
+      if(rows.length){
+          return done(null, {'email': email, 'id' :rows[0].id})
+      }else{
+          if(err) {throw err};
+          return done(null, false, {'message':''});
+      }
+    })
+  }
+));
+
+router.post('/login', function(req, res, next){
+  passport.authenticate('local-login',function(err, user, info){
+    if(err) res.status(500).json(err);
+    if(!user){return res.status(400).json(info.message);}
+
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.json(user);
+    });
+  })(req, res, next);
+})
 
 passport.use('local-join', new localStrategy({
     usernameField: 'email',
@@ -77,9 +104,9 @@ passport.use('local-join', new localStrategy({
   }
 ));
 
-router.post('/', passport.authenticate('local-join', {
-  successRedirect: '/login',
-  failureRedirect: '/join',
+router.post('/join', passport.authenticate('local-join', {
+  successRedirect: '/intro/',
+  failureRedirect: '/intro/join',
   failureFlash: true,
 }))
 
