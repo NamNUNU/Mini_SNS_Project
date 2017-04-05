@@ -91,7 +91,7 @@ ns.view = {
     });
     $("#dialog").dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 
-    
+
     document.querySelector("body").addEventListener("click", function (e) {
       if (e.target.classList[0] == "ui-widget-overlay") {
         $('#dialog').dialog('close');
@@ -104,7 +104,10 @@ ns.view = {
     document.querySelector(".dialog-title").innerHTML = data[0].email;
     document.querySelector(".dialog-picture img").src = data[0].picture;
     document.querySelector(".dialog-content").innerHTML = data[0].contents;
-    document.querySelector(".dialog-comments").innerHTML = "댓글이 들어갈 자리";
+    var comment_list = "<ul>";
+    for (var value of data) comment_list += "<li><strong>" + value.c_email + "</strong>  "+ value.c_comment +"</li>";
+    comment_list += "</ul>";
+    document.querySelector(".dialog-comments").innerHTML = comment_list;
     $('#dialog').dialog('open');
   }
 };
@@ -153,14 +156,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }, [result]);
   });
   ns.dispatcher.emit({
-    "type" : "cardModal"
-  },[]);
+    "type": "cardModal"
+  }, []);
 });
 
 document.addEventListener('click', function (e) {
   if (e.target.className === 'pro-card') {
     console.log("pro-card Click");
-    ns.util.card_ajax("/profile/card_view", e.target.alt ,function (result) {
+    ns.util.card_ajax("/profile/card_view", e.target.alt, function (result) {
       ns.dispatcher.emit({
         "type": "cardClick"
       }, [result]);
