@@ -1,15 +1,16 @@
 var express = require("express")
 var app = express();
 var router = express.Router();
-var mysql = require("mysql")
-var passport = require("passport")
+var mysql = require("mysql");
+var passport = require("passport");
 var localStrategy = require("passport-local").Strategy;
+
 
 // DATABASE SETTING
 var connection = mysql.createConnection({
   host : "localhost",
   user : "root",
-  password : "1234",
+  password : "14858",
   database : "sns"
 })
 connection.connect();

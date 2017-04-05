@@ -251,30 +251,32 @@ input.txt-box{
   border-bottom:1px solid #d9d9d9;
 }
 
-.login-wrap{
+/*login style*************************/
+
+.box-wrap{
   width: 900px;
   margin: 120px auto;
   overflow: hidden;
 }
 
-.login-wrap .content-wrap{
+.box-wrap .content-wrap{
   width:730px;
   margin:0 auto;
 }
 
-.login-wrap .img-wrap{
+.box-wrap .img-wrap{
   width : 350px;
   height: 550px;
   float: left;
 }
 
-.login-wrap .img-wrap .main-img{
+.box-wrap .img-wrap .main-img{
   width : 350px;
   height: 550px;
   border-radius: 10px;
 }
 
-.login-wrap .login-form{
+.box-wrap .login-form{
   width: 350px;
   padding:2px 5px;
   float: right;
@@ -284,12 +286,12 @@ input.txt-box{
   border-radius: 10px;
 }
 
-.login-wrap .brand-name{
+.box-wrap .brand-name{
   margin: 30px auto;
   font-size: 2rem;
 }
 
-.login-wrap .login-form input{
+.box-wrap .login-form input{
   margin: 6px auto;
   width : 215px;
   height : 30px;
@@ -298,7 +300,7 @@ input.txt-box{
   box-shadow: none;
 }
 
-.login-wrap .login-btn{
+.box-wrap .login-btn{
   width: 215px;
   -moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
@@ -327,55 +329,55 @@ input.txt-box{
 	text-shadow:0px 1px 0px #528ecc;
 }
 
-.login-wrap .login-btn:active{
+.box-wrap .login-btn:active{
   position:relative;
 	top:1px;
 }
 
-.login-wrap .login-join-form{
+.box-wrap .login-join-form{
   margin-bottom: 10px;
 }
 
-.login-wrap .warning{
+.box-wrap .warning{
   color: red;
   font-size: 0.8rem;
 }
 
-.login-wrap .loading{
+.box-wrap .loading{
   color:blue;
   font-size: 0.8rem;
 }
 
-.join-wrap{
+.box-wrap{
   width: 900px;
   margin: 120px auto;
   overflow: hidden;
 }
 
-.join-wrap .join-inner{
+.box-wrap .join-inner{
   width:215px;
   margin: 0 auto;
 }
 
-.join-wrap .content-wrap{
+.box-wrap .content-wrap{
   width:730px;
   margin:0 auto;
 }
 
-.join-wrap .img-wrap{
+.box-wrap .img-wrap{
   width : 350px;
   height: 550px;
   float: left;
 }
 
-.join-wrap .img-wrap .main-img{
+.box-wrap .img-wrap .main-img{
   width : 350px;
   height: 550px;
 
   border-radius: 10px;
 }
 
-.join-wrap .join-form{
+.box-wrap .join-form{
   width: 350px;
   height: 544px;
   padding:2px 5px;
@@ -385,16 +387,16 @@ input.txt-box{
   border-radius: 10px;
 }
 
-.join-wrap .brand-name{
+.box-wrap .brand-name{
   margin: 30px auto;
   font-size: 2rem;
 }
 
-.join-wrap .input-text-wrap{
+.box-wrap .input-text-wrap{
   margin-top:50px;
 }
 
-.join-wrap .join-form .input-text-wrap input{
+.box-wrap .join-form .input-text-wrap input{
   margin: 2px auto;
   width : 215px;
   height : 30px;
@@ -403,21 +405,26 @@ input.txt-box{
   box-shadow: none;
 }
 
-.join-wrap .input-text-wrap .confirm-pw{
+.box-wrap .input-text-wrap .confirm-pw{
   font-size: 0.8em;
   margin-top: 10px;
 }
 
-.join-wrap .join-text{
+.box-wrap .join-text{
   font-size: 0.8rem;
   margin-top:10px;
 }
 
-.join-wrap .join-btn-wrap{
+.box-wrap .picture-wrap{
+  margin:20px 0px 35px 0px;
+  text-align: center;
+}
+
+.box-wrap .join-btn-wrap{
   margin-top: 20px;
 }
 
-.join-wrap .join-btn{
+.box-wrap .join-btn{
   width: 215px;
   -moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
@@ -445,13 +452,13 @@ input.txt-box{
 	text-shadow:0px 1px 0px #528ecc;
 }
 
-.join-wrap .join-btn:active{
+.box-wrap .join-btn:active{
   position:relative;
 	top:1px;
 }
 
 
-.join-wrap .message {
+.box-wrap .message {
   text-align: center;
   margin-top: 10px;
   margin-bottom: -10px;
