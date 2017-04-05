@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="header-wrap">
+            <% include ./template/header %>
+        </header>
+        <div class="container">
+            <div class="content">
+                <div class="profile_editView">
+                    <div class="pro-edit-photo">
+                        <div class="pro-photo">
+                            <img class="pro-photo-img" src="<%= imgurl %>" alt="profile photo" />
+                        </div>
+                    </div>
+                    <button type="hidden" data-crop="300:300" data-images-only="true" role="uploadcare-uploader"></button>
+                    <div class="pro-edit-article">
+                        <div class="article-list">
+                            <p>email :
+                                <%= email %>
+                            </p>
+                            <p>기존 password : <input id="pw" type="text"></p>
+                            <p>새로운 password : <input id="pw_new" type="text"></p>
+                            <p>새로운 password 확인 : <input id="pw_new_check" type="text"></p>
+                            <p>phone : <input id="phone" type="text" value="<%= phone %>"></p>
+                            <p>introduce : <input id="intro" type="text" value="<%= intro %>"></p>
+                        </div>
+                        <div>
+                            <input id="edit_submit" type="submit">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer-wrap">
+            <% include ./template/footer %>
+        </footer>
+    </div>
+    <script>
+        UPLOADCARE_LOCALE = "en";
+        UPLOADCARE_TABS = "file facebook instagram";
+        UPLOADCARE_PUBLIC_KEY = "01d2eb7e13ca203f80b4";
+        UPLOADCARE_LOCALE_TRANSLATIONS = {
+            buttons: {
+                cancel: 'Cancel',
+                remove: 'Remove',
+                choose: {
+                files: {
+                    one: 'Choose a file',
+                    other: 'Choose files'
+                },
+                images: {
+                    one: 'Edit',
+                    other: 'Choose images'
+                }
+                }
+            }
+        };
+    </script>
+    <script charset="utf-8" src="//ucarecdn.com/libs/widget/2.10.3/uploadcare.full.min.js"></script>
+    <script src="../js/profile_edit.js"></script>
+</body>
+
+</html>
