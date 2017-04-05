@@ -128,6 +128,12 @@ input.txt-box{
   border-radius:20px;
 }
 
+.main-card .card-header .write-date{
+  position: absolute;
+  top:20px;
+  right:20px;
+}
+
 .main-card .card-header .info-box{
   padding-left:30px;
 }

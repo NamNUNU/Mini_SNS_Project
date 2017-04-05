@@ -22,15 +22,17 @@ CardMaker.prototype = {
   makeCard : function(){
     this.mainCardData.picture = util.$(".card-maker #photo_url").value;
     this.mainCardData.contents = util.$(".card-maker .txt-box").value;
-    this.mainCardData.email = util.$("#loginId").value;
+    this.mainCardData.writedate = util.nowDate();
 
     if(this.mainCardData.picture === ""){
       return;
     }
 
+
     util.runAjax(function(e){
-      var cardId = JSON.parse(e.target.responseText);
-      this.mainCardData.id = cardId;
+      var data = JSON.parse(e.target.responseText);
+      this.mainCardData.id = data.id;
+      this.mainCardData.email = data.email;
       mainCard.init(this.mainCardData, "before");
       this.clearCardMaker();
     }.bind(this), "POST", "http://localhost:3000/main/cards", this.mainCardData);
@@ -78,11 +80,16 @@ mainCard = (function(){
         }
       }.bind(this))
 
+//card.querySelector(".card-content .reply-comment .txt-box")
       card.addEventListener('keypress', function (e) {
+        var txtBox = card.querySelector(".card-content .reply-comment .txt-box");
         var target = e.target;
         var mainCard = target.closest(".main-card");
         var key = e.which || e.keyCode;
         if (key === 13) { // 13 is enter
+          if(txtBox.value === ""){
+            return;
+          }
           this.replyComment(mainCard);
         }
       }.bind(this));
@@ -92,15 +99,18 @@ mainCard = (function(){
     replyComment : function(mainCard){
       var commentData = {};
       commentData.comment = mainCard.querySelector(".reply-comment .txt-box").value;
-      commentData.email = util.$("#loginId").value;
+      //commentData.email = util.$("#loginId").value;
       commentData.p_id = mainCard.getAttribute("data-id");
 
       var commentList = mainCard.querySelector(".comment-list");
       var li = document.createElement("LI");
-      li.innerHTML = "<a href='#' class='writer'>"+commentData.email+"</a><span class='txt'>"+commentData.comment+"</span><button class='btnCommentDel'>X</button>"
 
       util.runAjax(function(e){
-        var data = e.target.responseText;
+        var data = JSON.parse(e.target.responseText);
+        //commentData.email = data.email
+        console.log(data);
+        li.setAttribute("data-id", data.id);
+        li.innerHTML = "<a href='#' class='writer'>"+data.email+"</a><span class='txt'>"+commentData.comment+"</span><button class='btnCommentDel'>X</button>"
         commentList.appendChild(li);
         mainCard.querySelector(".comment-info .total .num").innerHTML = commentList.childElementCount;
         mainCard.querySelector(".reply-comment .txt-box").value = "";
@@ -112,7 +122,7 @@ mainCard = (function(){
       ele.closest(".comment-list").removeChild(ele);
       commentData.id = ele.getAttribute("data-id");
       util.runAjax(function(e){
-        var data = e.target.responseText;
+        var data = JSON.parse(e.target.responseText);
       }, "DELETE", "http://localhost:3000/main/cards/comment", commentData);
     },
 
@@ -128,6 +138,7 @@ mainCard = (function(){
 
 
       result = mainCardTemplate.replace("{{email}}", data.email)
+                                .replace("{{write_date}}", data.writedate)
                                 .replace("{{picture}}", data.picture)
 
       var contentBox = "";
@@ -236,6 +247,16 @@ var util = {
       oReq.setRequestHeader("content-Type", "application/json");
       oReq.send(data);
     }
+  },
+
+  nowDate : function() {
+  	var date = new Date();
+  	var m = date.getMonth()+1;
+  	var d = date.getDate();
+  	var h = date.getHours();
+  	var i = date.getMinutes();
+  	var s = date.getSeconds();
+  	return date.getFullYear()+'-'+(m>9?m:'0'+m)+'-'+(d>9?d:'0'+d)+' '+(h>9?h:'0'+h)+':'+(i>9?i:'0'+i)+':'+(s>9?s:'0'+s);
   }
 }
 /*
@@ -277,15 +298,15 @@ MoreCardButton.prototype = {
     aTag.classList.add("card-more-btn");
     aTag.innerHTML = "더 읽어들이기";
     content.appendChild(aTag);
-
     this.regEvent(aTag);
   },
 
   regEvent : function(btnEle){
     btnEle.addEventListener("click", function(e){
+      /*
       if(this.flag === false){
         return;
-      }
+      }*/
 
       for(var i = this.loadCardIndex; i < this.loadCardIndex + this.LOADCARDNUM; i++ ){
         if(this.cardDataArr[i] === undefined){
@@ -300,7 +321,7 @@ MoreCardButton.prototype = {
         var content = util.$(".container .content");
         content.removeChild(btnEle)
       }
-      
+
       this.loadCardIndex += this.LOADCARDNUM;
 
     }.bind(this))
