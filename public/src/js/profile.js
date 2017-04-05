@@ -12,7 +12,21 @@ ns.util = {
     xhr.send(JSON.stringify(email_json));
     xhr.addEventListener('load', function () {
       var data = JSON.parse(xhr.responseText); //서버를 통해 받은 데이터, json object로 변환
-      console.log("xhr.addEventListener('load', function () {", data); //데이터가 잘 넘어왔는지 확인
+      fn(data); //데이터를 함수의 인자로 전달
+    });
+  },
+  card_ajax: function (url, alt, fn) {
+    console.log("card_ajax");
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    var id = {
+      id: alt
+    };
+    xhr.send(JSON.stringify(id));
+    xhr.addEventListener('load', function () {
+      var data = JSON.parse(xhr.responseText); //서버를 통해 받은 데이터, json object로 변환
+      console.log("card_ajax callback", data);
       fn(data); //데이터를 함수의 인자로 전달
     });
   }
@@ -45,7 +59,7 @@ ns.model = {
 
 ns.view = {
   render: function (data) {
-    console.log("view > render", data);
+    console.log("view > render");
     var email = data[0].email;
     var intro = data[0].intro;
     var picture = data[0].pro_picture;
@@ -61,9 +75,37 @@ ns.view = {
     var card_list = "";
     var data_length = data.length;
     for (var i = 0; i < data_length; i++) {
-      card_list += "<img class=\"pro-card\" src=\"" + data[i].picture + "\" alt=\"CARD\">";
+      card_list += "<img class=\"pro-card\" src=\"" + data[i].picture + "\" alt=\"" + data[i].id + "\">";
     }
     document.querySelector('.pro-cardView').innerHTML = card_list;
+  },
+  set_card: function () {
+    console.log("set_card");
+    $("#dialog").dialog({
+      resizable: false,
+      draggable: false,
+      height: "auto",
+      width: 800,
+      modal: true,
+      autoOpen: false
+    });
+    $("#dialog").dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
+
+    
+    document.querySelector("body").addEventListener("click", function (e) {
+      if (e.target.classList[0] == "ui-widget-overlay") {
+        $('#dialog').dialog('close');
+      }
+    });
+  },
+  cardView: function (data) {
+    document.querySelector(".dialog-profile-picture img").src = document.querySelector(".p-picture").src;
+    console.log(document.querySelector(".p-picture").src);
+    document.querySelector(".dialog-title").innerHTML = data[0].email;
+    document.querySelector(".dialog-picture img").src = data[0].picture;
+    document.querySelector(".dialog-content").innerHTML = data[0].contents;
+    document.querySelector(".dialog-comments").innerHTML = "댓글이 들어갈 자리";
+    $('#dialog').dialog('open');
   }
 };
 
@@ -79,6 +121,12 @@ ns.controller = {
       "render_profile": function (data) {
         this.view.render(data);
         this.view.renderCardList(data);
+      }.bind(this),
+      "cardModal": function () {
+        this.view.set_card();
+      }.bind(this),
+      "cardClick": function (data) {
+        this.view.cardView(data);
       }.bind(this)
     });
   }
@@ -99,9 +147,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  ns.util.ajax("http://localhost:3000/profile/render", function (result) {
+  ns.util.ajax("/profile/render", function (result) {
     ns.dispatcher.emit({
       "type": "initView"
     }, [result]);
   });
+  ns.dispatcher.emit({
+    "type" : "cardModal"
+  },[]);
+});
+
+document.addEventListener('click', function (e) {
+  if (e.target.className === 'pro-card') {
+    console.log("pro-card Click");
+    ns.util.card_ajax("/profile/card_view", e.target.alt ,function (result) {
+      ns.dispatcher.emit({
+        "type": "cardClick"
+      }, [result]);
+    });
+  }
 });

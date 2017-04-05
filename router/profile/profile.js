@@ -39,7 +39,7 @@ router.post('/edit', function (req, res) {
   var query_str = "select email,phone,intro,picture from user where email='" + email + "'";
   var query = connection.query(query_str, function (err, rows) {
     res.render('profile_edit.ejs', {
-      imgurl: "http://static.naver.net/newsstand/2017/0313/article_img/9054/173200/001.jpg",
+      imgurl: rows[0].picture,
       email: rows[0].email,
       phone: rows[0].phone,
       intro: rows[0].intro
@@ -51,7 +51,6 @@ router.post('/render', function (req, res) {
   var email = req.body.email.replace(/%40/, "@");
   var query_str = "select user.email, user.picture as pro_picture, user.intro, post.id, post.picture, post.contents from user inner join post on user.email = post.email where user.email = '" + email + "'";
   var query = connection.query(query_str, function (err, rows) {
-    console.log(rows);
     res.json(rows);
   });
 });
@@ -73,5 +72,11 @@ router.post('/edit_submit', function (req, res) {
   });
 });
 
+router.post('/card_view', function (req, res) {
+  var query_str = "select email, picture, contents from post where id='"+ req.body.id +"'";
+  var query = connection.query(query_str, function (err, rows) {
+    res.json(rows);
+  });
+});
 
 module.exports = router;
