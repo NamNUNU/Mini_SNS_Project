@@ -9,9 +9,10 @@ var login = require("./login/login");
 var logout = require("./logout/logout");
 var main = require("./main/main");
 var profile = require("./profile/profile");
+var intro = require("./intro/intro");
 
 router.get("/", function(req, res){
-  res.render("login.ejs");
+  res.render("intro.ejs",{message:''});
 })
 
 app.use(bodyParser.json());
@@ -22,5 +23,6 @@ router.use('/login', login);
 router.use('/logout', logout);
 router.use('/main', main);
 router.use('/profile', profile);
+router.use('/intro', intro);
 
 module.exports = router;
