@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var router = express.Router();
 var path = require('path');
-var mysql = require("mysql")
+var mysql = require("mysql");
 
 // DATABASE SETTING
 var connection = mysql.createConnection({
@@ -16,7 +16,7 @@ connection.connect();
 // main page는 세션 페이지가 있을때만 접근이 가능하게 한다
 router.get('/', function(req, res){
   var id = req.user;
-  if(!id) res.render('login.ejs');
+  if(!id) res.render('intro.ejs',{"message":""});
 
   var responseData = {};
   var query =  connection.query('select email from user where id="'+ id +'"', function(err,rows){

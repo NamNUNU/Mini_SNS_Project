@@ -401,6 +401,7 @@ input.txt-box{
   border: 1px solid #d9d9d9;
   background-color: #fff;
   border-radius: 10px;
+  display: none;
 }
 
 .box-wrap .brand-name{
