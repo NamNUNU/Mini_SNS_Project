@@ -98,12 +98,18 @@ input.txt-box{
   text-align: center;
 }
 
+/*main style*************************/
+
 .main-card{
   width:600px;
   margin:40px auto 0 auto;
   border:1px solid #d3d3d3;
   border-radius: 3px;
   background-color:#fff;
+}
+
+.main-card:last-child{
+  margin-bottom:40px;
 }
 
 .main-card .card-header{
@@ -120,6 +126,12 @@ input.txt-box{
   height:20px;
   background-color:#bbb;
   border-radius:20px;
+}
+
+.main-card .card-header .write-date{
+  position: absolute;
+  top:20px;
+  right:20px;
 }
 
 .main-card .card-header .info-box{
@@ -250,6 +262,10 @@ input.txt-box{
   padding:10px;
   border-bottom:1px solid #d9d9d9;
 }
+
+
+/**************************/
+
 
 /*login style*************************/
 
@@ -575,4 +591,67 @@ input.txt-box{
   font-size: 2rem;
   padding: 5rem 3rem;
 }
-/********************************/
+#dialog {
+  display: none;
+  padding: 1rem;
+}
+
+#dialog .dialog-wrap {
+  display: inline-block;
+}
+
+#dialog .dialog-wrap .dialog-left {
+  min-height: 100%;
+  max-height: 100%;
+  float: left;
+}
+
+#dialog .dialog-wrap .dialog-right {
+  padding: 4rem 0 1rem 1rem;
+  display: inline-block;
+  width: 320px;
+}
+
+#dialog .dialog-wrap .dialog-right hr {
+  border: 1px dotted lightgray;
+  margin: 1rem 0rem;
+}
+
+#dialog .dialog-picture {
+  width: 400px;
+  height: 400px;
+  text-align: center;
+}
+
+#dialog .dialog-picture img {
+  border-radius: 3%;
+  width: 100%;
+  min-height: 100%;
+  min-height: 100%;
+}
+
+#dialog .dialog-picture img {
+  width: 100%;
+  height: auto;
+}
+
+#dialog .dialog-profile {
+  display: inline-block;
+  padding: 0.5rem 0;
+}
+
+#dialog .dialog-profile .dialog-profile-picture {
+  display: inline-block;
+  float:left;
+}
+
+#dialog .dialog-profile .dialog-title {
+  display: inline-block;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+#dialog .dialog-profile .dialog-profile-picture img {
+  width: 2rem;
+  height: 2rem;
+}
