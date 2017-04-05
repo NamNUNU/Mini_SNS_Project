@@ -22,16 +22,18 @@ CardMaker.prototype = {
   makeCard : function(){
     this.mainCardData.picture = util.$(".card-maker #photo_url").value;
     this.mainCardData.contents = util.$(".card-maker .txt-box").value;
-    this.mainCardData.email = util.$("#loginId").value;
+    this.mainCardData.writedate = util.nowDate();
 
     if(this.mainCardData.picture === ""){
       return;
     }
 
+
     util.runAjax(function(e){
-      var cardId = JSON.parse(e.target.responseText);
-      this.mainCardData.id = cardId;
-      mainCard.init(this.mainCardData);
+      var data = JSON.parse(e.target.responseText);
+      this.mainCardData.id = data.id;
+      this.mainCardData.email = data.email;
+      mainCard.init(this.mainCardData, "before");
       this.clearCardMaker();
     }.bind(this), "POST", "http://localhost:3000/main/cards", this.mainCardData);
   },
@@ -48,8 +50,8 @@ var mainCard = mainCard || {};
 
 mainCard = (function(){
 
-  var init = function(data){
-    var view = new View();
+  var init = function(data, direction){
+    var view = new View(direction);
     var model = new Model(data);
     var controller = new Controller({
       view : view,
@@ -58,8 +60,9 @@ mainCard = (function(){
     controller.init();
   }
 
-  var View = function(){
+  var View = function(direction){
     this.mainCardList = util.$(".main-card-list");
+    this.direction = direction;
   }
 
   View.prototype = {
@@ -77,11 +80,16 @@ mainCard = (function(){
         }
       }.bind(this))
 
+//card.querySelector(".card-content .reply-comment .txt-box")
       card.addEventListener('keypress', function (e) {
+        var txtBox = card.querySelector(".card-content .reply-comment .txt-box");
         var target = e.target;
         var mainCard = target.closest(".main-card");
         var key = e.which || e.keyCode;
         if (key === 13) { // 13 is enter
+          if(txtBox.value === ""){
+            return;
+          }
           this.replyComment(mainCard);
         }
       }.bind(this));
@@ -91,15 +99,18 @@ mainCard = (function(){
     replyComment : function(mainCard){
       var commentData = {};
       commentData.comment = mainCard.querySelector(".reply-comment .txt-box").value;
-      commentData.email = util.$("#loginId").value;
+      //commentData.email = util.$("#loginId").value;
       commentData.p_id = mainCard.getAttribute("data-id");
 
       var commentList = mainCard.querySelector(".comment-list");
       var li = document.createElement("LI");
-      li.innerHTML = "<a href='#' class='writer'>"+commentData.email+"</a><span class='txt'>"+commentData.comment+"</span><button class='btnCommentDel'>X</button>"
 
       util.runAjax(function(e){
-        var data = e.target.responseText;
+        var data = JSON.parse(e.target.responseText);
+        //commentData.email = data.email
+        console.log(data);
+        li.setAttribute("data-id", data.id);
+        li.innerHTML = "<a href='#' class='writer'>"+data.email+"</a><span class='txt'>"+commentData.comment+"</span><button class='btnCommentDel'>X</button>"
         commentList.appendChild(li);
         mainCard.querySelector(".comment-info .total .num").innerHTML = commentList.childElementCount;
         mainCard.querySelector(".reply-comment .txt-box").value = "";
@@ -111,7 +122,7 @@ mainCard = (function(){
       ele.closest(".comment-list").removeChild(ele);
       commentData.id = ele.getAttribute("data-id");
       util.runAjax(function(e){
-        var data = e.target.responseText;
+        var data = JSON.parse(e.target.responseText);
       }, "DELETE", "http://localhost:3000/main/cards/comment", commentData);
     },
 
@@ -127,6 +138,7 @@ mainCard = (function(){
 
 
       result = mainCardTemplate.replace("{{email}}", data.email)
+                                .replace("{{write_date}}", data.writedate)
                                 .replace("{{picture}}", data.picture)
 
       var contentBox = "";
@@ -155,7 +167,12 @@ mainCard = (function(){
       mainCard.classList.add("main-card");
       mainCard.setAttribute("data-id", data.id);
       mainCard.innerHTML = result;
-      this.mainCardList.insertBefore(mainCard, this.mainCardList.firstChild);
+
+      if(this.direction === "after"){
+        this.mainCardList.appendChild(mainCard);
+      }else{
+        this.mainCardList.insertBefore(mainCard, this.mainCardList.firstChild);
+      }
       return mainCard;
     }
   }
@@ -230,9 +247,115 @@ var util = {
       oReq.setRequestHeader("content-Type", "application/json");
       oReq.send(data);
     }
+  },
+
+  nowDate : function() {
+  	var date = new Date();
+  	var m = date.getMonth()+1;
+  	var d = date.getDate();
+  	var h = date.getHours();
+  	var i = date.getMinutes();
+  	var s = date.getSeconds();
+  	return date.getFullYear()+'-'+(m>9?m:'0'+m)+'-'+(d>9?d:'0'+d)+' '+(h>9?h:'0'+h)+':'+(i>9?i:'0'+i)+':'+(s>9?s:'0'+s);
+  }
+}
+/*
+
+더읽어드리기 버튼
+1. 최초에 모든 카드 데이터를 받아둔다.
+   1-1 데이터가 10개 이하이면 더읽어들이기 버튼 생성하지 않는다.
+   1-2 데이터가 11개 이상이면 더읽어들이기 버튼 생성한다.
+2. 데이터가 10개 이상인 경우 10개 까지만 mainCard.init()
+3. 현재까지 보여준 데이터의 갯수를 저장해 둔다.
+4. 더읽어드리기 버튼을 클릭할 경우 갯수를 저장해둔 변수를 이용하여 그다음 10개까지 보여준다.
+   4-1 더읽어들인 데이터의 갯수가 10개 이하이면 더읽어들이기 버튼 생성하지 않는다.
+   4-2 더읽어들인 데이터의 갯수가 11개 이상이며 버튼 생성.
+
+*/
+
+function MoreCardButton(obj){
+  this.LOADCARDNUM = obj.LOADCARDNUM;
+  this.cardDataArr = obj.data;
+  this.loadCardIndex = this.LOADCARDNUM;
+
+  this.flag = true;
+
+  this.init();
+}
+
+MoreCardButton.prototype = {
+  init : function(){
+    if(this.cardDataArr.length <= this.LOADCARDNUM){
+      return;
+    }else{
+      this.renderView();
+    }
+  },
+
+  renderView : function(){
+    var content = util.$(".container .content");
+    var aTag = document.createElement("A");
+    aTag.classList.add("card-more-btn");
+    aTag.innerHTML = "더 읽어들이기";
+    content.appendChild(aTag);
+    this.regEvent(aTag);
+  },
+
+  regEvent : function(btnEle){
+    btnEle.addEventListener("click", function(e){
+      /*
+      if(this.flag === false){
+        return;
+      }*/
+
+      for(var i = this.loadCardIndex; i < this.loadCardIndex + this.LOADCARDNUM; i++ ){
+        if(this.cardDataArr[i] === undefined){
+          this.flag = false;
+          continue;
+        }else{
+          mainCard.init(this.cardDataArr[i], "after");
+        }
+      }
+
+      if(this.flag === false){
+        var content = util.$(".container .content");
+        content.removeChild(btnEle)
+      }
+
+      this.loadCardIndex += this.LOADCARDNUM;
+
+    }.bind(this))
   }
 }
 
+document.addEventListener("DOMContentLoaded", function(){
+  var singleWidget = uploadcare.SingleWidget("[role=uploadcare-uploader]");
+  singleWidget.onUploadComplete(function(info){
+    document.querySelector("#photo_url").value = document.querySelector("#photo_url").value + info.cdnUrl;
+  })
+
+  new CardMaker();
+  util.runAjax(function(e){
+    var LOADCARDNUM = 10;
+    var data = JSON.parse(e.target.responseText);
+
+    new MoreCardButton({
+      "data" : data,
+      "LOADCARDNUM" : LOADCARDNUM
+    });
+
+    for(var i = 0; i < LOADCARDNUM; i++){
+      if(data[i] === undefined){
+        return;
+      }
+      mainCard.init(data[i], "after");
+    }
+  }, "GET", "http://localhost:3000/main/cards")
+
+});
+
+
+/*
 document.addEventListener("DOMContentLoaded", function(){
   var singleWidget = uploadcare.SingleWidget("[role=uploadcare-uploader]");
   singleWidget.onUploadComplete(function(info){
@@ -248,4 +371,4 @@ document.addEventListener("DOMContentLoaded", function(){
   }, "GET", "http://localhost:3000/main/cards")
 
 });
-//http://localhost:3000/public/src/js/data.json
+*/
