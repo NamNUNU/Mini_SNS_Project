@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+
+
+  </head>
+  <body>
+    <div class="wrap">
+
+      <header class="header-wrap">
+          <% include ./template/header %>
+      </header>
+
+      <div class="container">
+        <div class="content">
+
+          <h3 style="text-align:center;margin-top:40px;">welcome, <%= id %> !!</h3>
+          <input type="hidden" id="loginId" value=<%= id %> />
+
+          <div class="card-maker">
+            <p class="content-txt">
+              <input class="txt-box" placeholder="Add content..."/>
+            </p>
+            <p class="upload">
+              <input type="hidden" role="uploadcare-uploader" data-crop="disabled" data-images-only="true" />
+              <button class="btn-upload" type="button" name="button">글 올리기</button>
+            </p>
+            <input type="hidden" id="photo_url"/>
+          </div>
+
+          <div class="main-card-list">
+            <script type="main-card-template" id="main-card-template">
+              <div class="card-header">
+                <span class="user-profile"></span>
+                <div class="info-box">
+                  <a href="#" class="writer">{{email}}</a>
+                </div>
+                <span class="write-date">{{write_date}}</span>
+              </div>
+              <div class="card-photo">
+                <p class="photo-img"><img src="{{picture}}" alt=""></p>
+              </div>
+              <div class="card-content">
+                <p class="content-box">
+                  {{content_box}}
+                </p>
+                <p class="comment-info">
+                  <span class="total">댓글 <span class = "num">{{total_comment}}</span>개</span>
+                  <a href="#" class="more-btn">더보기</a>
+                </p>
+                <ul class="comment-list">
+                  {{comment_list}}
+                </ul>
+                <div class="reply-comment">
+                  <div class="txt-box-wrap">
+                    <input class="txt-box" type="text" name="" value="" placeholder="댓글 달기..."/>
+                  </div>
+                </div>
+              </div>
+            </script>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer-wrap">
+          <% include ./template/footer %>
+      </footer>
+
+    </div>
+    <script>
+      UPLOADCARE_LOCALE = "en";
+      UPLOADCARE_TABS = "file";
+      UPLOADCARE_PUBLIC_KEY = "d271d2c7dba74206d488";
+    </script>
+    <script charset="utf-8" src="http://ucarecdn.com/libs/widget/2.10.3/uploadcare.full.min.js"></script>
+    <script type="text/javascript" src="../js/main.js"/>
+    <script type="text/javascript">
+
+    </script>
+
+
+  </body>
+</html>
+
+<!--<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="header-wrap">
+        <% include ./template/header %>
+      </header>
+      <div class="container">
+        <div class="content">
+
+          <br><br><h3 style="text-align:center">welcome, <%= id %> !!</h3>
+
+
+
+          <article class="main-card">
+            <div class="card-header">
+              <span class="user-profile"></span>
+              <div class="info-box">
+                <a href="#" class="writer">kimseyoon</a>
+              </div>
+            </div>
+            <div class="card-photo">
+              <p class="photo-img"><img src="https://ucarecdn.com/885cc423-9147-4302-8c7f-e08775ba4a89/" alt=""></p>
+            </div>
+            <div class="card-content">
+              <p class="content-box">
+                <span class="writer">min</span>
+                <span class="txt">이쁘게 나왔죠?</span>
+              </p>
+              <p class="comment-info">
+                <span class="total">댓글 10개</span>
+                <a href="#" class="more-btn">더보기</a>
+              </p>
+              <ul class="comment-list">
+                <li>
+                  <a href="#" class="writer">crong</a>
+                  <span class="txt">정말이쁘네요!</span>
+                </li>
+                <li>
+                  <a href="#" class="writer">crong</a>
+                  <span class="txt">정말이쁘네요!</span>
+                </li>
+              </ul>
+              <div class="reply-comment">
+                <div class="txt-box-wrap">
+                  <input class="txt-box" type="text" name="" value="" placeholder="댓글 달기..."/>
+                </div>
+
+              </div>
+            </div>
+          </article>
+
+          <a href="#" class="card-more-btn">더 읽어들이기</a>
+
+        </div>
+      </div>
+      <footer class="footer-wrap">
+        <% include ./template/footer %>
+      </footer>
+    </div>
+
+
+
+  </body>
+</html>
+-->

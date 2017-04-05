@@ -22,10 +22,10 @@ Update communication Function
 - 마침표를 찍지 않는다  
 - 제목과 본문사이에 2번째 행은 비워둔다  
 - 제목은 영어로 작성
-- Update : 폴더 단위 파일 변경
-- Add : 파일이나 기능 추가
-- Remove : 파일이나 기능 제거
-- Modify : 파일이나 기능, 내용 수정
+- Update : 기능 추가/변경
+- Add : 파일 추가
+- Remove : 파일이나 제거
+- Modify : 리팩토링, 내용 수정
 
 #### 본문   
 - 72자를 넘지 않는다  

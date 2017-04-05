@@ -75,7 +75,8 @@
 
         oReq.addEventListener('load', function(){
           var result = JSON.parse(oReq.responseText);
-          console.log(data, result);
+          console.log(result);
+          //console.log(data, result);
           var resultDiv = document.querySelector('.result');
 
           if(result.email) {
