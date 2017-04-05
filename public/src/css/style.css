@@ -98,12 +98,18 @@ input.txt-box{
   text-align: center;
 }
 
+/*main style*************************/
+
 .main-card{
   width:600px;
   margin:40px auto 0 auto;
   border:1px solid #d3d3d3;
   border-radius: 3px;
   background-color:#fff;
+}
+
+.main-card:last-child{
+  margin-bottom:40px;
 }
 
 .main-card .card-header{
@@ -120,6 +126,12 @@ input.txt-box{
   height:20px;
   background-color:#bbb;
   border-radius:20px;
+}
+
+.main-card .card-header .write-date{
+  position: absolute;
+  top:20px;
+  right:20px;
 }
 
 .main-card .card-header .info-box{
@@ -250,6 +262,10 @@ input.txt-box{
   padding:10px;
   border-bottom:1px solid #d9d9d9;
 }
+
+
+/**************************/
+
 
 /*login style*************************/
 

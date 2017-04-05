@@ -37,7 +37,7 @@ router.get('/', function(req, res){
 router.get('/cards', function(req, res){
   var post;
   var comments;
-  var postSql = 'select id, email, picture, contents from post'
+  var postSql = 'select id, email, picture, DATE_FORMAT(writedate, "%Y-%c-%d-%h:%i %p") as writedate, contents from post order by writedate desc'
   var commentsSql = 'select p_id, email, id, comment from comments'
   connection.query(postSql, function(err, rows){
     if(err) throw err;
@@ -64,27 +64,55 @@ router.get('/cards', function(req, res){
 
 // card maker가 card를 생성할 때
 router.post('/cards', function(req, res){
-  //console.log(req.user);
-  var email = req.body.email;
+  //var email = req.body.email;
   var picture = req.body.picture;
   var contents = req.body.contents;
-  var sql = 'insert into post(email, picture, contents) values(?, ?, ?)';
-  var params = [email, picture, contents];
+  var writedate = req.body.writedate;
+  var email = "";
+
+  var sql = 'select email from user where id = ?'
+  var params = [req.user];
+
   connection.query(sql, params, function(err, rows){
     if(err) throw err;
-    res.json(rows.insertId);
+    email = rows[0].email;
+
+    var sql = 'insert into post(email, picture, contents, writedate) values(?, ?, ?, ?)';
+    var params = [email, picture, contents, writedate];
+    connection.query(sql, params, function(err, rows){
+      if(err) throw err;
+      res.json({
+        id : rows.insertId,
+        email : email
+      });
+    })
+
   })
 })
 
 router.post('/cards/comment', function(req, res){
-  var email = req.body.email;
+  //var email = req.body.email;
   var comment = req.body.comment;
   var p_id = req.body.p_id;
-  var sql = 'insert into comments(p_id, email, comment) values(?, ?, ?)';
-  var params = [p_id, email, comment];
+  var email = "";
+
+  var sql = 'select email from user where id = ?'
+  var params = [req.user];
+
   connection.query(sql, params, function(err, rows){
     if(err) throw err;
-    res.json(rows.insertId);
+    email = rows[0].email;
+
+    var sql = 'insert into comments(p_id, email, comment) values(?, ?, ?)';
+    var params = [p_id, email, comment];
+    connection.query(sql, params, function(err, rows){
+      if(err) throw err;
+      res.json({
+        id : rows.insertId,
+        email : email
+      });
+    })
+
   })
 })
 
