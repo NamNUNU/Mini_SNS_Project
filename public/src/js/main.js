@@ -28,6 +28,8 @@ CardMaker.prototype = {
       return;
     }
 
+    util.$(".uploadcare-widget-button-remove").click();
+
 
     util.runAjax(function(e){
       var data = JSON.parse(e.target.responseText);
@@ -329,10 +331,35 @@ MoreCardButton.prototype = {
 }
 
 document.addEventListener("DOMContentLoaded", function(){
+
   var singleWidget = uploadcare.SingleWidget("[role=uploadcare-uploader]");
+  /*
   singleWidget.onUploadComplete(function(info){
     document.querySelector("#photo_url").value = document.querySelector("#photo_url").value + info.cdnUrl;
   })
+*/
+  function installWidgetPreviewSingle(widget, img) {
+    img.classList.add("preview-img");
+    widget.onChange(function(file) {
+      img.style.display = "none";
+      img.style.width = "50px";
+      img.style.height = "50px";
+      img.setAttribute("src", "");
+      if (file) {
+        file.done(function(fileInfo) {
+          var previewUrl = fileInfo.cdnUrl;
+          img.style.display = "block";
+          img.setAttribute("src", previewUrl);
+        });
+      }
+    });
+  }
+
+
+  installWidgetPreviewSingle(
+    uploadcare.SingleWidget(util.$('.image-preview-single input')),
+    util.$('.image-preview-single img')
+  );
 
   new CardMaker();
   util.runAjax(function(e){
