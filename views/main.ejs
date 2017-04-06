@@ -22,11 +22,16 @@
             <p class="content-txt">
               <input class="txt-box" placeholder="Add content..."/>
             </p>
-            <p class="upload">
-              <input type="hidden" role="uploadcare-uploader" data-crop="disabled" data-images-only="true" />
+            <div class="upload">
+
+              <div class="image-preview-single">
+                <img src="" alt=""/>
+                <input id="photo_url" type="hidden" role="uploadcare-uploader" data-crop="disabled" data-images-only="true" data-clearable="true"/>
+              </div>
+
               <button class="btn-upload" type="button" name="button">글 올리기</button>
-            </p>
-            <input type="hidden" id="photo_url"/>
+            </div>
+            <!--<input type="hidden" id="photo_url"/>-->
           </div>
 
           <div class="main-card-list">

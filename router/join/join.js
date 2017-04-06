@@ -69,9 +69,8 @@ passport.use('local-join', new localStrategy({
         var sql = {email:email, pw:password, phone:phone, intro:intro, picture:picture}
         var query = connection.query('insert into user set ?', sql, function(err,rows){
           if(err) {throw err};
-          return done(null, {'email':email,'id' :rows.insertId})
+          return done(null, {'email':email, 'id' :rows.insertId})
         })
-
       }
     })
   }
