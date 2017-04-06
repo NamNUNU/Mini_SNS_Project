@@ -8,7 +8,7 @@ var mysql = require("mysql");
 var connection = mysql.createConnection({
   host : "localhost",
   user : "root",
-  password : "1234",
+  password : "14858",
   database : "sns"
 })
 connection.connect();
@@ -16,13 +16,13 @@ connection.connect();
 // main page는 세션 페이지가 있을때만 접근이 가능하게 한다
 router.get('/', function(req, res){
   var id = req.user;
+  console.log(id)
   if(!id) res.render('intro.ejs',{"message":""});
 
   var responseData = {};
   var query =  connection.query('select email from user where id="'+ id +'"', function(err,rows){
     if(err) throw err;
     if(rows[0]){
-      //console.log(rows);
       responseData.result = "ok";
       responseData.email = rows[0].email;
     }else{
@@ -112,7 +112,6 @@ router.post('/cards/comment', function(req, res){
         email : email
       });
     })
-
   })
 })
 

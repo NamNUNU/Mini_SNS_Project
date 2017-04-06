@@ -61,7 +61,8 @@ input.txt-box{
 
 .header-wrap .search-box input{
   border: none;
-  font-size:1.2rem;
+  height: 25px;
+  font-size:0.8rem;
 }
 
 .header-wrap .util{
@@ -296,18 +297,6 @@ input.txt-box{
   margin:0 auto;
 }
 
-.box-wrap .img-wrap{
-  width : 350px;
-  height: 550px;
-  float: left;
-}
-
-.box-wrap .img-wrap .main-img{
-  width : 350px;
-  height: 550px;
-  border-radius: 10px;
-}
-
 .box-wrap .login-form{
   width: 350px;
   padding:2px 5px;
@@ -398,26 +387,34 @@ input.txt-box{
 
 .box-wrap .img-wrap{
   width : 350px;
-  height: 550px;
+  height: 610px;
   float: left;
 }
 
 .box-wrap .img-wrap .main-img{
   width : 350px;
-  height: 550px;
+  height: 610px;
 
   border-radius: 10px;
 }
 
 .box-wrap .join-form{
   width: 350px;
-  height: 544px;
+  height: 604px;
   padding:2px 5px;
   float: right;
   border: 1px solid #d9d9d9;
   background-color: #fff;
   border-radius: 10px;
   display: none;
+}
+
+.box-wrap .move-login {
+  text-align: center;
+}
+
+.box-wrap .move-login a{
+  font-size: 0.8rem;
 }
 
 .box-wrap .brand-name{
