@@ -6,15 +6,6 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <style>
-    .dialog-comments {
-      height: 300px;
-    }
-
-    .dialog-comments {
-      overflow: scroll;
-    }
-  </style>
 </head>
 
 <body>
@@ -43,7 +34,7 @@
           <form class="comment_form" action="/profile/comment" method="POST">
             <input class="hidden-id" name="comment_pid" type="text" style="display:none;">
             <input class="comment" name="comment_content" type="search">
-            <input type="submit">
+            <input type="submit" value="SEND">
           </form>
         </div>
       </div>
@@ -74,7 +65,7 @@
 
                 <form action="/profile/edit" method="POST">
                   <input id="hidden_email_value" name="email" type="text" value="{email}" style="display:none">
-                  <input type="submit">
+                  <input type="submit" value="EDIT">
                 </form>
 
               </div>
