@@ -51,9 +51,10 @@ ns.model = {
   setProfileData: function (data) { // == saveAllNewsList
     this.data_list = data.q2;
     this.cur_user = data.q1;
+    console.log("model에 data_list = ", this.data_list);
     ns.dispatcher.emit({
       "type": "render_profile"
-    }, [data.q2]);
+    }, [data]);
   },
 };
 
@@ -62,17 +63,17 @@ ns.model = {
 ns.view = {
   render: function (data) {
     console.log("view > render", data);
-    var email = data[0].email;
-    var intro = data[0].intro;
-    var picture = data[0].pro_picture;
+    var email = data.q2.email;
+    var intro = data.q2.intro;
+    var picture = data.q2.pro_picture;
     document.querySelector(".p-picture").src = picture;
     document.querySelector(".p-email").innerHTML = email;
     document.querySelector(".p-intro").innerHTML = intro;
-    document.querySelector(".p-postCount").innerHTML = "총 게시물 수 : " + data.length;
-
-    document.querySelector('#hidden_email_value').value = data[0].email;
+    document.querySelector(".p-postCount").innerHTML = "총 게시물 수 : " + data.q3.length;
+    document.querySelector('#hidden_email_value').value = email;
   },
   renderCardList: function (data) {
+    data = data.q3;
     console.log("view > renderCardList", data);
     var card_list = "";
     var data_length = data.length;

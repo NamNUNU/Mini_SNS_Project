@@ -61,13 +61,22 @@ router.post('/render', function (req, res) {
   var query_str = "select email from user where id=" + req.user;
   var query = connection.query(query_str, function (err, rows) {
     var q1 = rows[0].email;
-    query_str = "select user.email, user.picture as pro_picture, user.intro, post.id, post.picture, post.contents from user inner join post on user.email = post.email where user.email = '" + email + "'";
+    query_str = "select user.email, user.picture as pro_picture, user.intro from user where email='" + email + "'";
+    console.log(query_str);
     var query = connection.query(query_str, function (err, rows) {
-      var data = {
-        q1: q1,
-        q2: rows
-      }
-      res.json(data);
+      var q2 = rows[0];
+      query_str = "select post.id, post.picture, post.contents from user inner join post on user.email = post.email where user.email = '" + email + "'";
+      var query = connection.query(query_str, function (err, rows) {
+        console.log("포스트 정보", rows);
+        var q3 = rows;
+        var data = {
+          q1: q1, //현재 로그인 유저 이메일
+          q2: q2, //현재 프로필 창의 유저의 정보
+          q3: q3 //현재 프로필 창의 post 정보
+        }
+        res.json(data);
+      });
+
     });
   });
 });
