@@ -99,16 +99,20 @@ ns.view = {
     });
   },
   cardView: function (data) {
+    console.log("cardView", data);
+    document.querySelector(".hidden-id").value = data[0].id;
     document.querySelector(".dialog-profile-picture img").src = document.querySelector(".p-picture").src;
     console.log(document.querySelector(".p-picture").src);
     document.querySelector(".dialog-title").innerHTML = data[0].email;
     document.querySelector(".dialog-picture img").src = data[0].picture;
     document.querySelector(".dialog-content").innerHTML = data[0].contents;
+  },
+  cardView_comment: function (data) {
+    console.log("cardView_comment", data);
     var comment_list = "<ul>";
-    for (var value of data) comment_list += "<li><strong>" + value.c_email + "</strong>  "+ value.c_comment +"</li>";
+    for (var value of data) comment_list += "<li><strong>" + value.c_email + "</strong>  " + value.c_comment + "</li>";
     comment_list += "</ul>";
     document.querySelector(".dialog-comments").innerHTML = comment_list;
-    $('#dialog').dialog('open');
   }
 };
 
@@ -130,6 +134,11 @@ ns.controller = {
       }.bind(this),
       "cardClick": function (data) {
         this.view.cardView(data);
+        this.view.cardView_comment(data);
+        $('#dialog').dialog('open');
+      }.bind(this),
+      "AddComment": function (data) {
+        this.view.cardView_comment(data);
       }.bind(this)
     });
   }
@@ -169,4 +178,12 @@ document.addEventListener('click', function (e) {
       }, [result]);
     });
   }
+});
+
+document.querySelector(".comment_form").addEventListener("submit", function(e){
+    ns.util.card_ajax("/profile/card_view", document.querySelector(".hidden-id").value, function (result) {
+    ns.dispatcher.emit({
+      "type": "AddComment"
+    }, [result]);
+  });
 });

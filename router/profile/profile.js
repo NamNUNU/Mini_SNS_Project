@@ -9,8 +9,8 @@ var connection = mysql.createConnection({ //mysql connection
   host: 'localhost',
   //port: 3306,
   user: 'root',
-  password: '14858',
-  database: 'sns'
+  password: "bjh0324",
+  database: "snstest"
 });
 connection.connect(function (err) { //mysql connection
   if (err) {
@@ -73,10 +73,18 @@ router.post('/edit_submit', function (req, res) {
 });
 
 router.post('/card_view', function (req, res) {
-  var query_str = "select post.email, post.picture, post.contents, comments.email as c_email, comments.comment as c_comment, comments.data as c_data from post inner join comments on post.id=comments.p_id where post.id=" + req.body.id;
+  var query_str = "select post.id, post.email, post.picture, post.contents, comments.email as c_email, comments.comment as c_comment, comments.data as c_data from post inner join comments on post.id=comments.p_id where post.id=" + req.body.id;
   var query = connection.query(query_str, function (err, rows) {
     res.json(rows);
   });
 });
-
+router.post('/comment', function (req, res) {
+  //현재 세션의 값을 기준으로 집어 넣어야...
+  var query_str = "insert into comments values (" + req.body.comment_pid + ",'" + "user1@mail.com" + "','" + req.body.comment_content + "'," + "'data'" + ")";
+  var query = connection.query(query_str, function (err, rows) {
+    if (err) {
+      throw err
+    };
+  });
+});
 module.exports = router;
