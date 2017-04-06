@@ -6,6 +6,15 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <style>
+    .dialog-comments {
+      height: 300px;
+    }
+
+    .dialog-comments {
+      overflow: scroll;
+    }
+  </style>
 </head>
 
 <body>
@@ -30,9 +39,17 @@
         <hr>
         <div class="dialog-comments">
         </div>
+        <div class="dialog-comments-insert">
+          <form class="comment_form" action="/profile/comment" method="POST">
+            <input class="hidden-id" name="comment_pid" type="text" style="display:none;">
+            <input class="comment" name="comment_content" type="search">
+            <input type="submit">
+          </form>
+        </div>
       </div>
     </div>
   </div>
+
   <div class="wrap">
     <header class="header-wrap">
       <div class="header-content">
@@ -41,8 +58,8 @@
           <input name="search" type="search" class="txt-box" />
         </form>
         <ul class="util">
-          <li>profile</li>
-          <li><a href="/logout">log-out</a></li>
+          <li><a href="/profile/cur">Profile</a></li>
+          <li><a href="/logout">Log-out</a></li>
         </ul>
       </div>
     </header>

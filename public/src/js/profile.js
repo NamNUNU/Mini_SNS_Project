@@ -47,8 +47,11 @@ ns.dispatcher = {
 
 ns.model = {
   data_list: [],
+  cur_user: "",
   setProfileData: function (data) { // == saveAllNewsList
-    this.data_list = data;
+    this.data_list = data.q2;
+    this.cur_user = data.q1;
+    console.log("model에 data_list = ", this.data_list);
     ns.dispatcher.emit({
       "type": "render_profile"
     }, [data]);
@@ -59,19 +62,19 @@ ns.model = {
 
 ns.view = {
   render: function (data) {
-    console.log("view > render");
-    var email = data[0].email;
-    var intro = data[0].intro;
-    var picture = data[0].pro_picture;
+    console.log("view > render", data);
+    var email = data.q2.email;
+    var intro = data.q2.intro;
+    var picture = data.q2.pro_picture;
     document.querySelector(".p-picture").src = picture;
     document.querySelector(".p-email").innerHTML = email;
     document.querySelector(".p-intro").innerHTML = intro;
-    document.querySelector(".p-postCount").innerHTML = "총 게시물 수 : " + data.length;
-
-    document.querySelector('#hidden_email_value').value = data[0].email;
+    document.querySelector(".p-postCount").innerHTML = "총 게시물 수 : " + data.q3.length;
+    document.querySelector('#hidden_email_value').value = email;
   },
   renderCardList: function (data) {
-    console.log("view > renderCardList");
+    data = data.q3;
+    console.log("view > renderCardList", data);
     var card_list = "";
     var data_length = data.length;
     for (var i = 0; i < data_length; i++) {
@@ -91,7 +94,7 @@ ns.view = {
     });
     $("#dialog").dialog().parents(".ui-dialog").find(".ui-dialog-titlebar").remove();
 
-    
+
     document.querySelector("body").addEventListener("click", function (e) {
       if (e.target.classList[0] == "ui-widget-overlay") {
         $('#dialog').dialog('close');
@@ -99,13 +102,20 @@ ns.view = {
     });
   },
   cardView: function (data) {
+    console.log("cardView", data);
+    console.log(data.q1[0].id);
+    document.querySelector(".hidden-id").value = data.q1[0].id;
     document.querySelector(".dialog-profile-picture img").src = document.querySelector(".p-picture").src;
-    console.log(document.querySelector(".p-picture").src);
-    document.querySelector(".dialog-title").innerHTML = data[0].email;
-    document.querySelector(".dialog-picture img").src = data[0].picture;
-    document.querySelector(".dialog-content").innerHTML = data[0].contents;
-    document.querySelector(".dialog-comments").innerHTML = "댓글이 들어갈 자리";
-    $('#dialog').dialog('open');
+    document.querySelector(".dialog-title").innerHTML = data.q1[0].email;
+    document.querySelector(".dialog-picture img").src = data.q1[0].picture;
+    document.querySelector(".dialog-content").innerHTML = data.q1[0].contents;
+  },
+  cardView_comment: function (data) {
+    console.log("cardView_comment", data.q2);
+    var comment_list = "<ul>";
+    for (var value of data.q2) comment_list += "<li><strong>" + value.c_email + "</strong>  " + value.c_comment + "</li>";
+    comment_list += "</ul>";
+    document.querySelector(".dialog-comments").innerHTML = comment_list;
   }
 };
 
@@ -127,6 +137,11 @@ ns.controller = {
       }.bind(this),
       "cardClick": function (data) {
         this.view.cardView(data);
+        this.view.cardView_comment(data);
+        $('#dialog').dialog('open');
+      }.bind(this),
+      "AddComment": function (data) {
+        this.view.cardView_comment(data);
       }.bind(this)
     });
   }
@@ -153,17 +168,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }, [result]);
   });
   ns.dispatcher.emit({
-    "type" : "cardModal"
-  },[]);
+    "type": "cardModal"
+  }, []);
 });
 
 document.addEventListener('click', function (e) {
   if (e.target.className === 'pro-card') {
     console.log("pro-card Click");
-    ns.util.card_ajax("/profile/card_view", e.target.alt ,function (result) {
+    ns.util.card_ajax("/profile/card_view", e.target.alt, function (result) {
       ns.dispatcher.emit({
         "type": "cardClick"
       }, [result]);
     });
   }
+});
+
+document.querySelector(".comment_form").addEventListener("submit", function (e) {
+  setTimeout(function () {
+    ns.util.card_ajax("/profile/card_view", document.querySelector(".hidden-id").value, function (result) {
+      ns.dispatcher.emit({
+        "type": "AddComment"
+      }, [result]);
+    });
+  }, 500);
 });
