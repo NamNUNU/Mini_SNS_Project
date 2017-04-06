@@ -47,11 +47,13 @@ ns.dispatcher = {
 
 ns.model = {
   data_list: [],
+  cur_user: "",
   setProfileData: function (data) { // == saveAllNewsList
-    this.data_list = data;
+    this.data_list = data.q2;
+    this.cur_user = data.q1;
     ns.dispatcher.emit({
       "type": "render_profile"
-    }, [data]);
+    }, [data.q2]);
   },
 };
 
@@ -59,7 +61,7 @@ ns.model = {
 
 ns.view = {
   render: function (data) {
-    console.log("view > render");
+    console.log("view > render", data);
     var email = data[0].email;
     var intro = data[0].intro;
     var picture = data[0].pro_picture;
@@ -71,7 +73,7 @@ ns.view = {
     document.querySelector('#hidden_email_value').value = data[0].email;
   },
   renderCardList: function (data) {
-    console.log("view > renderCardList");
+    console.log("view > renderCardList", data);
     var card_list = "";
     var data_length = data.length;
     for (var i = 0; i < data_length; i++) {
@@ -100,17 +102,17 @@ ns.view = {
   },
   cardView: function (data) {
     console.log("cardView", data);
-    document.querySelector(".hidden-id").value = data[0].id;
+    console.log(data.q1[0].id);
+    document.querySelector(".hidden-id").value = data.q1[0].id;
     document.querySelector(".dialog-profile-picture img").src = document.querySelector(".p-picture").src;
-    console.log(document.querySelector(".p-picture").src);
-    document.querySelector(".dialog-title").innerHTML = data[0].email;
-    document.querySelector(".dialog-picture img").src = data[0].picture;
-    document.querySelector(".dialog-content").innerHTML = data[0].contents;
+    document.querySelector(".dialog-title").innerHTML = data.q1[0].email;
+    document.querySelector(".dialog-picture img").src = data.q1[0].picture;
+    document.querySelector(".dialog-content").innerHTML = data.q1[0].contents;
   },
   cardView_comment: function (data) {
-    console.log("cardView_comment", data);
+    console.log("cardView_comment", data.q2);
     var comment_list = "<ul>";
-    for (var value of data) comment_list += "<li><strong>" + value.c_email + "</strong>  " + value.c_comment + "</li>";
+    for (var value of data.q2) comment_list += "<li><strong>" + value.c_email + "</strong>  " + value.c_comment + "</li>";
     comment_list += "</ul>";
     document.querySelector(".dialog-comments").innerHTML = comment_list;
   }
@@ -180,10 +182,12 @@ document.addEventListener('click', function (e) {
   }
 });
 
-document.querySelector(".comment_form").addEventListener("submit", function(e){
+document.querySelector(".comment_form").addEventListener("submit", function (e) {
+  setTimeout(function () {
     ns.util.card_ajax("/profile/card_view", document.querySelector(".hidden-id").value, function (result) {
-    ns.dispatcher.emit({
-      "type": "AddComment"
-    }, [result]);
-  });
+      ns.dispatcher.emit({
+        "type": "AddComment"
+      }, [result]);
+    });
+  }, 500);
 });
