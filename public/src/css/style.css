@@ -560,7 +560,10 @@ input.txt-box{
   text-align: center;
   padding: 4rem;
 }
-
+.profile_editView button{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 .pro-edit-article {
   width: 400px;
   margin: 0 auto;
@@ -570,17 +573,25 @@ input.txt-box{
 .pro-edit-article div:first-child {
   text-align: justify;
   padding: 1rem;
-}
-
+  }
 .pro-edit-article div p {
-  padding-bottom: 1rem;
+  padding-top:0.5rem;
+  padding-bottom: 0.5rem;
 }
-
+.pro-edit-article .article-list hr {
+  border: 1px dotted rgba(0, 0, 0, 0.05);
+}
+.pro-edit-article .article-list p {
+  font-size: 1.1rem;
+}
 .pro-edit-article .article-list input {
   width: 150px;
   float: right;
 }
-
+#edit_submit {
+  width : 5rem;
+  height : 1.5rem;
+}
 .pro-photo {
   display: inline-block;
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -588,7 +599,6 @@ input.txt-box{
   border-radius: 100%;
   padding: 5px;
 }
-
 .pro-photo img {
   display: block;
   width: 120px;
@@ -640,12 +650,8 @@ input.txt-box{
   border-radius: 3%;
   width: 100%;
   min-height: 100%;
-  min-height: 100%;
-}
-
-#dialog .dialog-picture img {
-  width: 100%;
-  height: auto;
+  max-height: 100%;
+  border: 2px solid rgba(0, 0, 0, 0.05);
 }
 
 #dialog .dialog-profile {
@@ -655,16 +661,53 @@ input.txt-box{
 
 #dialog .dialog-profile .dialog-profile-picture {
   display: inline-block;
-  float:left;
+  float: left;
+}
+
+#dialog .dialog-profile .dialog-profile-picture img{
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 100%;
 }
 
 #dialog .dialog-profile .dialog-title {
   display: inline-block;
-  padding-top: 0.5rem;
-  padding-left: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 #dialog .dialog-profile .dialog-profile-picture img {
   width: 2rem;
   height: 2rem;
+}
+
+.dialog-comments {
+  height: 300px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+}
+
+.p-email,
+.p-intro {
+  font-size: 1.1rem;
+}
+
+.p-postCount {
+  font-size: 0.9rem;
+}
+
+.p-email {
+  font-weight: bold;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.comment_form {
+  padding-top: 0.7rem;
+}
+
+.comment {
+  width: 230px;
 }
