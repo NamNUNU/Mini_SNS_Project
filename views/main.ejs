@@ -2,8 +2,6 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/style.css">
-
-
   </head>
   <body>
     <div class="wrap">
@@ -24,10 +22,10 @@
             </p>
             <div class="upload">
 
-              <div class="image-preview-single">
+              <!--<div class="image-preview-single">-->
                 <img src="" alt=""/>
                 <input id="photo_url" type="hidden" role="uploadcare-uploader" data-crop="disabled" data-images-only="true" data-clearable="true"/>
-              </div>
+              <!--</div>-->
 
               <button class="btn-upload" type="button" name="button">글 올리기</button>
             </div>
@@ -39,7 +37,7 @@
               <div class="card-header">
                 <span class="user-profile"></span>
                 <div class="info-box">
-                  <a href="#" class="writer">{{email}}</a>
+                  <a href="/profile?search={{email2}}" class="writer">{{email}}</a>
                 </div>
                 <span class="write-date">{{write_date}}</span>
               </div>

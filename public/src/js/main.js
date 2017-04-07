@@ -30,7 +30,6 @@ CardMaker.prototype = {
 
     util.$(".uploadcare-widget-button-remove").click();
 
-
     util.runAjax(function(e){
       var data = JSON.parse(e.target.responseText);
       this.mainCardData.id = data.id;
@@ -51,7 +50,6 @@ CardMaker.prototype = {
 var mainCard = mainCard || {};
 
 mainCard = (function(){
-
   var init = function(data, direction){
     var view = new View(direction);
     var model = new Model(data);
@@ -75,14 +73,12 @@ mainCard = (function(){
     regEvent : function(card){
       card.addEventListener("click", function(e){
         var target = e.target;
-        e.preventDefault();
-        //console.log(target);
+        //e.preventDefault();
         if(target.classList.contains("btnCommentDel")){
           this.deleteComment(target.parentElement);
         }
       }.bind(this))
 
-//card.querySelector(".card-content .reply-comment .txt-box")
       card.addEventListener('keypress', function (e) {
         var txtBox = card.querySelector(".card-content .reply-comment .txt-box");
         var target = e.target;
@@ -97,11 +93,10 @@ mainCard = (function(){
       }.bind(this));
 
     },
-
+// 카드 댓글 추가
     replyComment : function(mainCard){
       var commentData = {};
       commentData.comment = mainCard.querySelector(".reply-comment .txt-box").value;
-      //commentData.email = util.$("#loginId").value;
       commentData.p_id = mainCard.getAttribute("data-id");
 
       var commentList = mainCard.querySelector(".comment-list");
@@ -109,25 +104,27 @@ mainCard = (function(){
 
       util.runAjax(function(e){
         var data = JSON.parse(e.target.responseText);
-        //commentData.email = data.email
-        console.log(data);
         li.setAttribute("data-id", data.id);
-        li.innerHTML = "<a href='#' class='writer'>"+data.email+"</a><span class='txt'>"+commentData.comment+"</span><button class='btnCommentDel'>X</button>"
+        li.innerHTML = "<a href='/profile?search="+data.email+"' class='writer'>"+data.email+"</a><span class='txt'>"+commentData.comment+"</span><button class='btnCommentDel'>X</button>"
         commentList.appendChild(li);
         mainCard.querySelector(".comment-info .total .num").innerHTML = commentList.childElementCount;
         mainCard.querySelector(".reply-comment .txt-box").value = "";
       }, "POST", "http://localhost:3000/main/cards/comment", commentData)
     },
-
+// 카드 댓글 삭제
     deleteComment : function(ele){
       var commentData = {};
+      var mainCard = ele.closest(".main-card");
+      var commentList = mainCard.querySelector(".comment-list");
       ele.closest(".comment-list").removeChild(ele);
       commentData.id = ele.getAttribute("data-id");
       util.runAjax(function(e){
         var data = JSON.parse(e.target.responseText);
+        console.log("a")
+        mainCard.querySelector(".comment-info .total .num").innerHTML = commentList.childElementCount;
       }, "DELETE", "http://localhost:3000/main/cards/comment", commentData);
     },
-
+// 댓글 더보기 기능 아직 미구현
     moreComment : function(){
 
     },
@@ -135,13 +132,11 @@ mainCard = (function(){
     renderView : function(data){
       var mainCardTemplate = util.$("#main-card-template").innerHTML;
       var result = "";
-
       var loginId = util.$("#loginId").value;
-
-
       result = mainCardTemplate.replace("{{email}}", data.email)
                                 .replace("{{write_date}}", data.writedate)
                                 .replace("{{picture}}", data.picture)
+                                .replace("{{email2}}", data.email)
 
       var contentBox = "";
       if(data.content !== ""){
@@ -272,14 +267,12 @@ var util = {
 4. 더읽어드리기 버튼을 클릭할 경우 갯수를 저장해둔 변수를 이용하여 그다음 10개까지 보여준다.
    4-1 더읽어들인 데이터의 갯수가 10개 이하이면 더읽어들이기 버튼 생성하지 않는다.
    4-2 더읽어들인 데이터의 갯수가 11개 이상이며 버튼 생성.
-
 */
 
 function MoreCardButton(obj){
   this.LOADCARDNUM = obj.LOADCARDNUM;
   this.cardDataArr = obj.data;
   this.loadCardIndex = this.LOADCARDNUM;
-
   this.flag = true;
 
   this.init();
@@ -305,11 +298,6 @@ MoreCardButton.prototype = {
 
   regEvent : function(btnEle){
     btnEle.addEventListener("click", function(e){
-      /*
-      if(this.flag === false){
-        return;
-      }*/
-
       for(var i = this.loadCardIndex; i < this.loadCardIndex + this.LOADCARDNUM; i++ ){
         if(this.cardDataArr[i] === undefined){
           this.flag = false;
@@ -331,13 +319,7 @@ MoreCardButton.prototype = {
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-
   var singleWidget = uploadcare.SingleWidget("[role=uploadcare-uploader]");
-  /*
-  singleWidget.onUploadComplete(function(info){
-    document.querySelector("#photo_url").value = document.querySelector("#photo_url").value + info.cdnUrl;
-  })
-*/
   function installWidgetPreviewSingle(widget, img) {
     img.classList.add("preview-img");
     widget.onChange(function(file) {
@@ -357,8 +339,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
   installWidgetPreviewSingle(
-    uploadcare.SingleWidget(util.$('.image-preview-single input')),
-    util.$('.image-preview-single img')
+    uploadcare.SingleWidget(util.$('.upload input')),
+    util.$('.upload img')
   );
 
   new CardMaker();
@@ -380,22 +362,3 @@ document.addEventListener("DOMContentLoaded", function(){
   }, "GET", "http://localhost:3000/main/cards")
 
 });
-
-
-/*
-document.addEventListener("DOMContentLoaded", function(){
-  var singleWidget = uploadcare.SingleWidget("[role=uploadcare-uploader]");
-  singleWidget.onUploadComplete(function(info){
-    document.querySelector("#photo_url").value = document.querySelector("#photo_url").value + info.cdnUrl;
-  })
-
-  new CardMaker();
-  util.runAjax(function(e){
-    var data = JSON.parse(e.target.responseText);
-    for(var i = 0; i < data.length; i++){
-      mainCard.init(data[i]);
-    }
-  }, "GET", "http://localhost:3000/main/cards")
-
-});
-*/
