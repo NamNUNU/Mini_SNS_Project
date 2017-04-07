@@ -1,0 +1,91 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+  <div id="dialog">
+    <div class="dialog-wrap">
+      <div class="dialog-left">
+        <div class="dialog-profile">
+          <div class="dialog-profile-picture">
+            <img src="" alt="">
+          </div>
+          <div class="dialog-title"></div>
+        </div>
+
+        <div class="dialog-picture">
+          <img src="" alt="">
+        </div>
+      </div>
+      <div class="dialog-right">
+        <div class="dialog-content">
+
+        </div>
+        <hr>
+        <div class="dialog-comments">
+        </div>
+        <div class="dialog-comments-insert">
+          <form class="comment_form" action="/profile/comment" method="POST">
+            <input class="hidden-id" name="comment_pid" type="text" style="display:none;">
+            <input class="comment" name="comment_content" type="search">
+            <input type="submit" value="SEND">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="header-wrap">
+      <div class="header-content">
+        <h1 class="h-logo"><a href="/main">Codestagram</a></h1>
+        <form class="search-box" action="/profile" post="get">
+          <input name="search" type="search" class="txt-box" />
+        </form>
+        <ul class="util">
+          <li><a href="/profile/cur">Profile</a></li>
+          <li><a href="/logout">Log-out</a></li>
+        </ul>
+      </div>
+    </header>
+    <div class="container">
+      <div class="content">
+        <div class="profileView">
+          <div class="pro-info">
+            <div class="pro-photo"> <img class="p-picture" src="" alt="profile photo" /> </div>
+            <div class="pro-article">
+              <div>
+                <p class="p-email" style="display:inline">{EMAIL}</p>
+
+                <form action="/profile/edit" method="POST">
+                  <input id="hidden_email_value" name="email" type="text" value="{email}" style="display:none">
+                  <input type="submit" value="EDIT">
+                </form>
+
+              </div>
+              <p class="p-postCount">게시물 수 : {all_post_num}</p>
+              <p class="p-intro">{introduce}</p>
+            </div>
+          </div>
+          <div class="pro-cardView">
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer-wrap">
+      <div class="footer-content">
+        <p class="copy">정보 지원 블로그 관련 기사 채용정보 개인정보 처리방침</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/js/profile.js"></script>
+</body>
+
+</html>
