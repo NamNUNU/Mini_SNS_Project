@@ -9,8 +9,13 @@ var connection = mysql.createConnection({ //mysql connection
   host: 'localhost',
   //port: 3306,
   user: 'root',
+<<<<<<< HEAD
   password: '1234',
   database: 'sns'
+=======
+  password: "bjh0324",
+  database: "snstest"
+>>>>>>> db1c40da4e1a362c0f8799707310cb985a47fb83
 });
 connection.connect(function (err) { //mysql connection
   if (err) {
@@ -33,6 +38,15 @@ router.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, "../../public/src/html/profile.html"));
 });
 
+router.get('/cur', function (req, res) {
+  console.log("/cur");
+  var query_str = "select email from user where id=" + req.user;
+  var query = connection.query(query_str, function (err, rows) {
+    console.log(rows[0].email);
+    res.redirect("/profile?search=" + rows[0].email);
+  });
+});
+
 router.post('/edit', function (req, res) {
   console.log(req.user)
   //console.log("/profile/edit");
@@ -50,9 +64,26 @@ router.post('/edit', function (req, res) {
 
 router.post('/render', function (req, res) {
   var email = req.body.email.replace(/%40/, "@");
-  var query_str = "select user.email, user.picture as pro_picture, user.intro, post.id, post.picture, post.contents from user inner join post on user.email = post.email where user.email = '" + email + "'";
+  var query_str = "select email from user where id=" + req.user;
   var query = connection.query(query_str, function (err, rows) {
-    res.json(rows);
+    var q1 = rows[0].email;
+    query_str = "select user.email, user.picture as pro_picture, user.intro from user where email='" + email + "'";
+    console.log(query_str);
+    var query = connection.query(query_str, function (err, rows) {
+      var q2 = rows[0];
+      query_str = "select post.id, post.picture, post.contents from user inner join post on user.email = post.email where user.email = '" + email + "'";
+      var query = connection.query(query_str, function (err, rows) {
+        console.log("포스트 정보", rows);
+        var q3 = rows;
+        var data = {
+          q1: q1, //현재 로그인 유저 이메일
+          q2: q2, //현재 프로필 창의 유저의 정보
+          q3: q3 //현재 프로필 창의 post 정보
+        }
+        res.json(data);
+      });
+
+    });
   });
 });
 
@@ -74,10 +105,32 @@ router.post('/edit_submit', function (req, res) {
 });
 
 router.post('/card_view', function (req, res) {
-  var query_str = "select email, picture, contents from post where id='"+ req.body.id +"'";
+  console.log("/card_view req.body.id", req.body.id);
+  var query_str = "select post.id, post.email, post.picture, post.contents from post where post.id =" + req.body.id;
   var query = connection.query(query_str, function (err, rows) {
-    res.json(rows);
+    var q1 = rows;
+    query_str = "select comments.email as c_email, comments.comment as c_comment from post inner join comments on post.id=comments.p_id where post.id=" + req.body.id;
+    var query2 = connection.query(query_str, function (err, rows) {
+      var data = {
+        q1: q1,
+        q2: rows
+      }
+      res.send(data);
+    });
   });
 });
+router.post('/comment', function (req, res) {
+  var query_str = "select email from user where id=" + req.user;
+  var query = connection.query(query_str, function (err, rows) {
+    var email = rows[0].email;
+    query_str = "insert into comments (p_id, email, comment) values (" + req.body.comment_pid + ",'" + rows[0].email + "','" + req.body.comment_content + "')";
+    console.log(query_str);
+    var query = connection.query(query_str, function (err, rows) {
+      if (err) {
+        throw err
+      };
+    });
+  });
 
+});
 module.exports = router;

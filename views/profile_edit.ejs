@@ -21,17 +21,17 @@
                     <button type="hidden" data-crop="300:300" data-images-only="true" role="uploadcare-uploader"></button>
                     <div class="pro-edit-article">
                         <div class="article-list">
-                            <p>email :
-                                <%= email %>
-                            </p>
+                            <p>email : <strong><%= email %></strong></p>
+                            <hr>
                             <p>기존 password : <input id="pw" type="text"></p>
                             <p>새로운 password : <input id="pw_new" type="text"></p>
                             <p>새로운 password 확인 : <input id="pw_new_check" type="text"></p>
+                            <hr>
                             <p>phone : <input id="phone" type="text" value="<%= phone %>"></p>
                             <p>introduce : <input id="intro" type="text" value="<%= intro %>"></p>
                         </div>
                         <div>
-                            <input id="edit_submit" type="submit">
+                            <input id="edit_submit" type="submit" value="편집">
                         </div>
                     </div>
 
@@ -52,14 +52,14 @@
                 cancel: 'Cancel',
                 remove: 'Remove',
                 choose: {
-                files: {
-                    one: 'Choose a file',
-                    other: 'Choose files'
-                },
-                images: {
-                    one: 'Edit',
-                    other: 'Choose images'
-                }
+                    files: {
+                        one: 'Choose a file',
+                        other: 'Choose files'
+                    },
+                    images: {
+                        one: 'Edit Profile Photo',
+                        other: 'Choose images'
+                    }
                 }
             }
         };
