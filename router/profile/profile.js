@@ -9,8 +9,13 @@ var connection = mysql.createConnection({ //mysql connection
   host: 'localhost',
   //port: 3306,
   user: 'root',
+<<<<<<< HEAD
+  password: '1234',
+  database: 'sns'
+=======
   password: "bjh0324",
   database: "snstest"
+>>>>>>> db1c40da4e1a362c0f8799707310cb985a47fb83
 });
 connection.connect(function (err) { //mysql connection
   if (err) {
@@ -43,7 +48,8 @@ router.get('/cur', function (req, res) {
 });
 
 router.post('/edit', function (req, res) {
-  console.log("/profile/edit");
+  console.log(req.user)
+  //console.log("/profile/edit");
   var email = req.body.email;
   var query_str = "select email,phone,intro,picture from user where email='" + email + "'";
   var query = connection.query(query_str, function (err, rows) {
