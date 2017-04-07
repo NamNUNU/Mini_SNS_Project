@@ -34,7 +34,8 @@ router.get('/', function (req, res) {
 });
 
 router.post('/edit', function (req, res) {
-  console.log("/profile/edit");
+  console.log(req.user)
+  //console.log("/profile/edit");
   var email = req.body.email;
   var query_str = "select email,phone,intro,picture from user where email='" + email + "'";
   var query = connection.query(query_str, function (err, rows) {

@@ -117,14 +117,13 @@ router.post('/cards/comment', function(req, res){
 })
 
 router.delete('/cards/comment', function(req, res){
-  //console.log(req.body.id)
 
   var id = req.body.id;
   var sql = 'delete from comments where id = ?'
   var params = [id];
   connection.query(sql, params, function(err, rows){
     if(err) throw err;
-    //console.log(rows);
+    res.json(rows.insertId);
   })
 })
 
