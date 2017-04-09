@@ -8,82 +8,91 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 document.querySelector('.input-text-wrap').addEventListener('click',function(event){
+  var targetId = document.getElementById(event.target.id);
   if(event.target.nodeName==="INPUT"){
-    document.getElementById(event.target.id).value = "";
-    document.getElementById(event.target.id).style.color = "black";
+    targetId.value = "";
+    targetId.style.color = "black";
   }
 })
 
 document.querySelector('.input-text-wrap').addEventListener('focusout',function(event){
+  var targetId = document.getElementById(event.target.id);
+
   if(event.target.value===""){
-    switch(event.target.id){
+    switch(targetId){
       case "email" :
-        document.getElementById(event.target.id).value = "이메일을 입력하세요";
-        document.getElementById(event.target.id).style.color = "grey";
+        targetId.value = "이메일을 입력하세요";
+        targetId.style.color = "grey";
       break;
       case "password" :
-        document.getElementById(event.target.id).value = "ipsumipsumipsum";
-        document.getElementById(event.target.id).style.color = "grey";
+        targetId.value = "ipsumipsumipsum";
+        targetId.style.color = "grey";
       break;
       case "repassword" :
-        document.getElementById(event.target.id).value = "ipsumipsumipsum";
-        document.getElementById(event.target.id).style.color = "grey";
+        targetId.value = "ipsumipsumipsum";
+        targetId.style.color = "grey";
       break;
       case "phone" :
-        document.getElementById(event.target.id).value = "( - ) 없이 입력하세요";
-        document.getElementById(event.target.id).style.color = "grey";
+        targetId.value = "( - ) 없이 입력하세요";
+        targetId.style.color = "grey";
       break;
       case "intro" :
-        document.getElementById(event.target.id).value = "자기소개를 입력하세요";
-        document.getElementById(event.target.id).style.color = "grey";
+        targetId.value = "자기소개를 입력하세요";
+        targetId.style.color = "grey";
       break;
     }
   }
   document.querySelector('.input-text-wrap').addEventListener('keyup', function(event){
+    var confirmPw = document.querySelector(".confirm-pw");
+
     if(event.target.id==="repassword"){
       var pw = document.querySelector("#password").value;
       var repw = document.querySelector("#repassword").value;
       if(pw!==repw){
-        document.querySelector(".confirm-pw").innerHTML = "비밀번호가 일치하지 않습니다"
-        document.querySelector(".confirm-pw").style.color = "red"
+        confirmPw.innerHTML = "비밀번호가 일치하지 않습니다"
+        confirmPw.style.color = "red"
       }
       else{
-        document.querySelector(".confirm-pw").innerHTML = "비밀번호가 일치합니다"
-        document.querySelector(".confirm-pw").style.color = "green"
+        confirmPw.innerHTML = "비밀번호가 일치합니다"
+        confirmPw.style.color = "green"
       }
     }
   })
 })
 
 document.querySelector('.move-join-text').addEventListener('click',function(){
+  var login = document.querySelector('.login-form');
+  var join = document.querySelector('.join-form');
   if(state==="login"){
-    document.querySelector('.login-form').style.display = "none";
-    document.querySelector('.join-form').style.display = "block";
+    login.style.display = "none";
+    join.style.display = "block";
     state="join"
   }else{
-    document.querySelector('.login-form').style.display = "block";
-    document.querySelector('.join-form').style.display = "none";
+    login.style.display = "block";
+    join.style.display = "none";
     state==="login"
   }
 })
 
 
 document.querySelector('.login-form').addEventListener('click',function(event){
+  var targetId = document.getElementById(event.target.id);
   if(event.target.nodeName==="INPUT"){
-    document.getElementById(event.target.id).value = "";
-    document.getElementById(event.target.id).style.color = "black";
+    targetId.value = "";
+    targetId.style.color = "black";
   }
 })
 document.querySelector('.login-form').addEventListener('focusout',function(event){
+  var targetId = document.getElementById(event.target.id);
   if(event.target.value===""){
     switch(event.target.id){
       case "login-email" :
-        document.getElementById(event.target.id).value = "email";
-        document.getElementById(event.target.id).style.color = "grey";
+        targetId.value = "email";
+        targetId.style.color = "grey";
       break;
       case "login-password" :
-        document.getElementById(event.target.id).value = "ipsumipsumipsum";
-        document.getElementById(event.target.id).style.color = "grey";
+        targetId.value = "ipsumipsumipsum";
+        targetId.style.color = "grey";
       break;
     }
   }
