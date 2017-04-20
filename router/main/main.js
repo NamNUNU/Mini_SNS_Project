@@ -2,14 +2,22 @@ var express = require("express");
 var app = express();
 var router = express.Router();
 var path = require('path');
+var options = require('../option');
 var mysql = require("mysql");
 
-// DATABASE SETTING
+var loginData = {
+        host: options.storageConfig.HOST,
+        user: options.storageConfig.user,
+        password: options.storageConfig.password
+};
+
+
 var connection = mysql.createConnection({
-  host : "localhost",
-  user : "root",
-  password : "14858",
-  database : "sns"
+  host: loginData.host,
+  port:3306,
+  user:loginData.user,
+  password:loginData.password,
+  database:'sns'
 })
 connection.connect();
 

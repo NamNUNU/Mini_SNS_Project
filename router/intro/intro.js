@@ -4,14 +4,22 @@ var router = express.Router();
 var mysql = require("mysql");
 var passport = require("passport");
 var localStrategy = require("passport-local").Strategy;
+var options = require('../option');
+var mysql = require('mysql');
+
+var loginData = {
+        host: options.storageConfig.HOST,
+        user: options.storageConfig.user,
+        password: options.storageConfig.password
+};
 
 
-// DATABASE SETTING
 var connection = mysql.createConnection({
-  host : "localhost",
-  user : "root",
-  password : "14858",
-  database : "sns"
+  host: loginData.host,
+  port:3306,
+  user:loginData.user,
+  password:loginData.password,
+  database:'sns'
 })
 connection.connect();
 

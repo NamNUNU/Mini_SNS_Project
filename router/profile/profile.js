@@ -4,23 +4,23 @@ var router = express.Router();
 var path = require('path');
 var ejs = require('ejs'); //ejs
 var bodyParser = require("body-parser");
+var options = require('../option');
 var mysql = require('mysql'); //mysql
-var connection = mysql.createConnection({ //mysql connection
-  host: 'localhost',
-  //port: 3306,
-  user: 'root',
-  password: "14858",
-  database: "sns"
-});
-connection.connect(function (err) { //mysql connection
-  if (err) {
-    console.log("! mysql connection error");
-    console.log(err);
-    throw err;
-  } else {
-    console.log("* mysql connection success");
-  }
-});
+
+var loginData = {
+        host: options.storageConfig.HOST,
+        user: options.storageConfig.user,
+        password: options.storageConfig.password
+};
+
+var connection = mysql.createConnection({
+  host: loginData.host,
+  port:3306,
+  user:loginData.user,
+  password:loginData.password,
+  database:'sns'
+})
+connection.connect();
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
